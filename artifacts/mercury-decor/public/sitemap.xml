@@ -3,4 +3,19 @@
   <url>
     <loc>/</loc>
   </url>
+  <url>
+    <loc>/about</loc>
+  </url>
+  <url>
+    <loc>/services</loc>
+  </url>
+  <url>
+    <loc>/catalogs</loc>
+  </url>
+  <url>
+    <loc>/industries</loc>
+  </url>
+  <url>
+    <loc>/contact</loc>
+  </url>
 </urlset>
