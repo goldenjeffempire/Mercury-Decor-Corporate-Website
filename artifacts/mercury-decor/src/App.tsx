@@ -41,9 +41,16 @@ function AppLink({ href, children, className = '', onClick, ...rest }: { href: s
 }
 
 function Logo({ dark = false }: { dark?: boolean }) {
-  return <AppLink href="/" className="group inline-flex items-center gap-3" data-testid="link-logo">
-    <span className={`relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[3px] border ${dark ? 'border-white/20 bg-white' : 'border-[#d6a62a]/30 bg-white'}`}><img src={logoPath} alt="Mercury Décor Limited logo" className="h-full w-full object-cover" /></span>
-    <span className="hidden sm:block"><span className={`block font-display text-[13px] font-extrabold uppercase tracking-[.12em] ${dark ? 'text-white' : 'text-[#082b54]'}`}>Mercury Décor</span><span className={`block text-[9px] font-semibold uppercase tracking-[.2em] ${dark ? 'text-white/55' : 'text-[#a90000]'}`}>Limited</span></span>
+  return <AppLink href="/" className="group inline-flex items-center" data-testid="link-logo">
+    <span className={`relative flex h-14 w-28 shrink-0 items-center justify-center overflow-hidden rounded-[3px] border bg-white p-1 shadow-sm sm:w-32 ${dark ? 'border-white/25' : 'border-[#d6a62a]/30'}`}>
+      <img
+        src={logoPath}
+        alt="Mercury Décor Limited logo"
+        width="1280"
+        height="640"
+        className="h-full w-full object-contain"
+      />
+    </span>
   </AppLink>;
 }
 
