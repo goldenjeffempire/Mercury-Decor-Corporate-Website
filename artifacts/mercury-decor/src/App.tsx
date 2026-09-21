@@ -432,7 +432,6 @@ function CatalogIndex() {
     <div className="container-wide">
       <div className="reveal flex flex-col justify-between gap-7 border-b border-[#082b54]/15 pb-8 md:flex-row md:items-end">
         <div><SectionLabel>Latest catalog release</SectionLabel><h2 className="mt-5 max-w-[760px] font-display text-4xl font-extrabold tracking-[-.05em] text-[#082b54] md:text-6xl">Details that change the <span className="font-editorial font-semibold italic text-[#a90000]">room.</span></h2></div>
-        <div className="flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-[.12em] text-[#082b54]"><span className="rounded-full bg-[#d6a62a] px-3 py-2">11 new ceiling views</span><span className="rounded-full border border-[#082b54]/15 px-3 py-2">9 new project videos</span></div>
       </div>
       <div className="mt-4 flex flex-col justify-between gap-5 sm:flex-row sm:items-center"><p className="max-w-[590px] text-sm leading-7 text-[#5b6470]">Browse a growing reference library of finished spaces, architectural lighting and decorative work. Each image opens into the full digital catalog.</p><AppLink href="/catalogs" data-testid="link-home-catalog-index" className="inline-flex items-center gap-2 text-sm font-extrabold text-[#a90000]">Open the full catalog <ArrowRight size={16} /></AppLink></div>
       <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3">
