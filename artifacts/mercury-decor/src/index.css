@@ -109,6 +109,12 @@ body {
   font-family: 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+img, video { background-color: transparent; }
+main > section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 850px;
+}
+::selection { background: rgba(214, 166, 42, .85); color: #061f3d; }
 button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
   outline: 3px solid rgba(214, 166, 42, .72);
@@ -145,6 +151,17 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .showroom-image { animation: showroomFade .7s ease both; }
 .showroom-progress { animation: showroomProgress 5s linear both; }
 .showroom-progress.paused { animation-play-state: paused; }
+.contract-step { position: relative; isolation: isolate; }
+.contract-step::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, rgba(214,166,42,.10), transparent 55%);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.contract-step:hover::after { opacity: 1; }
 @keyframes pulseLine { 0%,100% { transform: scaleX(.75); opacity: .45; } 50% { transform: scaleX(1); opacity: 1; } }
 .pulse-line { animation: pulseLine 3s ease-in-out infinite; transform-origin: left; }
 .hide-scrollbar::-webkit-scrollbar { display: none; }

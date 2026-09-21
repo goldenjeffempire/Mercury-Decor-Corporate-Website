@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   ArrowRight, Boxes, Building2, Check, ChevronDown, ChevronLeft, ChevronRight,
   ClipboardList, Compass, Hammer, Layers3, Mail, MapPin, Menu, PackageCheck,
-  Phone, Play, Ruler, Send, Sparkles, Truck, X, type LucideIcon,
+  Phone, Ruler, Send, Sparkles, Truck, X, type LucideIcon,
 } from 'lucide-react';
 import { SiWhatsapp } from 'react-icons/si';
 import { ErrorBoundary } from '@/components/error-boundary';
@@ -42,6 +42,12 @@ const galleryImages = [
   { src: `${import.meta.env.BASE_URL}futuristic-gallery/mercury-future-05.jpg`, alt: 'Futuristic staircase atrium concept with floating steps and luminous handrails', portrait: false, concept: true },
   { src: `${import.meta.env.BASE_URL}futuristic-gallery/mercury-future-06.jpg`, alt: 'Futuristic executive office concept with modular ceiling and navy-gold finishes', portrait: false, concept: true },
 ];
+const showroomImages = galleryImages.map((image) => ({
+  ...image,
+  src: image.src
+    .replace('project-gallery-watermarked/', 'project-gallery/')
+    .replace('futuristic-gallery/', 'futuristic-gallery-clean/'),
+}));
 const projectVideos = [
   { src: `${import.meta.env.BASE_URL}project-videos/video-03.mp4`, webm: `${import.meta.env.BASE_URL}project-videos/video-03.webm`, poster: `${import.meta.env.BASE_URL}project-videos/video-03-poster.jpg`, title: 'Illuminated hallway finishes', description: 'A walkthrough highlighting wall treatments, lighting and decorative detailing.' },
   { src: `${import.meta.env.BASE_URL}project-videos/video-02.mp4`, webm: `${import.meta.env.BASE_URL}project-videos/video-02.webm`, poster: `${import.meta.env.BASE_URL}project-videos/video-02-poster.jpg`, title: 'Interior finishing details', description: 'Close-up views of columns, doors and coordinated interior finishes.' },
@@ -167,7 +173,7 @@ function Header() {
 }
 
 function Footer() {
-  return <><footer className="bg-[#061f3d] py-14 text-white"><div className="container-wide"><div className="grid gap-12 border-b border-white/12 pb-12 md:grid-cols-[1.15fr_.75fr_.9fr]"><div><Logo dark /><p className="mt-6 max-w-[270px] text-sm leading-6 text-white/55">Professional Interior &amp; Exterior Finishing Specialists.</p><div className="mt-6 h-px w-24 bg-[#d6a62a]" /></div><div><div className="eyebrow text-[#d6a62a]">Navigate</div><div className="mt-5 grid grid-cols-2 gap-y-3 text-sm text-white/62">{navItems.map(([label, href]) => <AppLink key={href} href={href} data-testid={`link-footer-${label.toLowerCase()}`} className="transition-colors hover:text-white">{label}</AppLink>)}</div></div><div><div className="eyebrow text-[#d6a62a]">Contact</div><div className="mt-5 space-y-3 text-sm leading-6 text-white/62"><div>131 Circular Road,<br />Elekahia Housing Estate,<br />Port Harcourt, Rivers State, Nigeria</div><a href="mailto:silnice873@gmail.com" className="block transition-colors hover:text-white" data-testid="link-footer-email">silnice873@gmail.com</a><a href="tel:+2348082277274" className="block transition-colors hover:text-white" data-testid="link-footer-phone">+234 808 227 7274</a><WhatsAppButton compact label="WhatsApp" /></div></div></div><div className="flex flex-col gap-3 pt-7 text-xs text-white/38 sm:flex-row sm:items-center sm:justify-between"><span>© 2026 Mercury Décor Limited. All Rights Reserved.</span><span>Building Beautiful Spaces.</span></div></div></footer><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-testid="link-floating-whatsapp" aria-label="Chat with Mercury Décor on WhatsApp" title="Chat on WhatsApp" className="fixed bottom-5 right-4 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_rgba(8,43,84,.28)] transition-all hover:-translate-y-1 hover:bg-[#1fba59] focus-visible:outline-white sm:bottom-7 sm:right-7 sm:h-16 sm:w-16"><SiWhatsapp size={29} aria-hidden="true" /><span className="sr-only">Chat on WhatsApp</span></a></>;
+  return <><footer className="bg-[#061f3d] py-14 text-white"><div className="container-wide"><div className="grid gap-12 border-b border-white/12 pb-12 md:grid-cols-[1.35fr_.85fr] md:items-end"><div><Logo dark /><p className="mt-6 max-w-[430px] text-sm leading-7 text-white/55">Professional interior and exterior finishing, construction, procurement, supply and project support for spaces built to make a lasting impression.</p><div className="mt-7 flex flex-wrap gap-2">{['Finishing', 'Construction', 'Procurement', 'Project support'].map((item) => <span key={item} className="rounded-full border border-white/12 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.1em] text-white/52">{item}</span>)}</div></div><div><div className="eyebrow text-[#d6a62a]">Contact</div><div className="mt-5 space-y-3 text-sm leading-6 text-white/62"><address className="not-italic">131 Circular Road,<br />Elekahia Housing Estate,<br />Port Harcourt, Rivers State, Nigeria</address><a href="mailto:silnice873@gmail.com" className="block transition-colors hover:text-white" data-testid="link-footer-email">silnice873@gmail.com</a><a href="tel:+2348082277274" className="block transition-colors hover:text-white" data-testid="link-footer-phone">+234 808 227 7274</a><WhatsAppButton compact label="WhatsApp" /></div></div></div><div className="flex flex-col gap-3 pt-7 text-xs text-white/38 sm:flex-row sm:items-center sm:justify-between"><span>© 2026 Mercury Décor Limited. All Rights Reserved.</span><span>Building Beautiful Spaces.</span></div></div></footer><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-testid="link-floating-whatsapp" aria-label="Chat with Mercury Décor on WhatsApp" title="Chat on WhatsApp" className="fixed bottom-5 right-4 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_rgba(8,43,84,.28)] transition-all hover:-translate-y-1 hover:bg-[#1fba59] focus-visible:outline-white sm:bottom-7 sm:right-7 sm:h-16 sm:w-16"><SiWhatsapp size={29} aria-hidden="true" /><span className="sr-only">Chat on WhatsApp</span></a></>;
 }
 
 function Shell({ children, title, path }: { children: ReactNode; title: string; path: string }) {
@@ -187,7 +193,7 @@ function ShowroomPreview() {
   const startedAtRef = useRef(0);
   const goTo = (index: number) => {
     remainingRef.current = 5000;
-    setActiveIndex((index + galleryImages.length) % galleryImages.length);
+    setActiveIndex((index + showroomImages.length) % showroomImages.length);
   };
 
   useEffect(() => {
@@ -195,7 +201,7 @@ function ShowroomPreview() {
     startedAtRef.current = performance.now();
     timerRef.current = window.setTimeout(() => {
       remainingRef.current = 5000;
-      setActiveIndex((index) => (index + 1) % galleryImages.length);
+      setActiveIndex((index) => (index + 1) % showroomImages.length);
     }, remainingRef.current);
     return () => {
       if (timerRef.current !== null) window.clearTimeout(timerRef.current);
@@ -210,10 +216,10 @@ function ShowroomPreview() {
   };
   const resume = () => setPaused(false);
 
-  const active = galleryImages[activeIndex];
+  const active = showroomImages[activeIndex];
   const nextImages = [1, 2].map((offset) => {
-    const index = (activeIndex + offset) % galleryImages.length;
-    return { ...galleryImages[index], index };
+    const index = (activeIndex + offset) % showroomImages.length;
+    return { ...showroomImages[index], index };
   });
 
   return <section id="showroom" className="overflow-hidden bg-[#061f3d] py-20 text-white md:py-28">
@@ -230,7 +236,7 @@ function ShowroomPreview() {
         <figure
           className="reveal relative min-h-[360px] touch-pan-y select-none overflow-hidden bg-[#0b3769] outline-none focus-visible:ring-2 focus-visible:ring-[#d6a62a] sm:min-h-[520px]"
           tabIndex={0}
-          aria-label={`Featured project image ${activeIndex + 1} of ${galleryImages.length}. Press and hold to pause.`}
+          aria-label={`Featured project image ${activeIndex + 1} of ${showroomImages.length}. Press and hold to pause.`}
           onPointerDown={(event) => { event.currentTarget.setPointerCapture(event.pointerId); hold(); }}
           onPointerUp={resume}
           onPointerCancel={resume}
@@ -239,15 +245,14 @@ function ShowroomPreview() {
           onKeyUp={(event) => { if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); resume(); } }}
           onContextMenu={(event) => event.preventDefault()}
         >
-          <img key={active.src} src={active.src} alt={active.alt} draggable={false} onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = logoPath; }} className="showroom-image pointer-events-none absolute inset-0 h-full w-full object-cover" />
-          <ImageWatermark large />
+          <img key={active.src} src={active.src} alt={active.alt} draggable={false} decoding="async" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = logoPath; }} className="showroom-image pointer-events-none absolute inset-0 h-full w-full object-cover" />
           <figcaption className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between bg-gradient-to-t from-[#061f3d]/90 via-[#061f3d]/35 to-transparent px-5 pb-5 pt-20 sm:px-7 sm:pb-7">
             <span className="eyebrow text-[#d6a62a]">{'concept' in active && active.concept ? 'Future design concept' : 'Featured project view'}</span>
-            <span className="font-mono text-xs text-white/65">{String(activeIndex + 1).padStart(2, '0')} / {galleryImages.length}</span>
+            <span className="font-mono text-xs text-white/65">{String(activeIndex + 1).padStart(2, '0')} / {showroomImages.length}</span>
           </figcaption>
         </figure>
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
-          {nextImages.map((image, position) => <button key={image.src} type="button" onClick={() => goTo(image.index)} aria-label={`Show image ${image.index + 1}`} className="reveal group relative min-h-[180px] overflow-hidden bg-[#0b3769] text-left sm:min-h-[240px]"><img src={image.src} alt={image.alt} loading="lazy" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = logoPath; }} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" /><ImageWatermark /><span className="absolute inset-0 bg-gradient-to-t from-[#061f3d]/75 via-transparent to-transparent" /><span className="absolute bottom-4 left-4 z-20 text-xs font-bold uppercase tracking-[.12em] text-white/85">{position === 0 ? 'Up next' : 'Following'}</span></button>)}
+          {nextImages.map((image, position) => <button key={image.src} type="button" onClick={() => goTo(image.index)} aria-label={`Show image ${image.index + 1}`} className="reveal group relative min-h-[180px] overflow-hidden bg-[#0b3769] text-left sm:min-h-[240px]"><img src={image.src} alt={image.alt} loading="lazy" decoding="async" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = logoPath; }} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" /><span className="absolute inset-0 bg-gradient-to-t from-[#061f3d]/75 via-transparent to-transparent" /><span className="absolute bottom-4 left-4 z-20 text-xs font-bold uppercase tracking-[.12em] text-white/85">{position === 0 ? 'Up next' : 'Following'}</span></button>)}
         </div>
       </div>
       <div className="mt-5 h-1 overflow-hidden bg-white/10"><div key={activeIndex} className={`showroom-progress h-full bg-[#d6a62a] ${paused ? 'paused' : ''}`} /></div>
@@ -255,70 +260,72 @@ function ShowroomPreview() {
   </section>;
 }
 
-function VideoShowroom() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [videoFailed, setVideoFailed] = useState(false);
+function LoopingProjectVideo({ video, index }: { video: (typeof projectVideos)[number]; index: number }) {
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const cardRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const active = projectVideos[activeIndex];
-  const nextVideo = () => setActiveIndex((index) => (index + 1) % projectVideos.length);
 
   useEffect(() => {
-    setVideoFailed(false);
-    const video = videoRef.current;
-    if (video) video.play().catch(() => undefined);
-  }, [activeIndex]);
+    const card = cardRef.current;
+    if (!card) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setShouldLoad(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: '700px 0px' });
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    if (!videoFailed) return;
-    const timer = window.setTimeout(nextVideo, 5000);
-    return () => window.clearTimeout(timer);
-  }, [videoFailed]);
+    if (!shouldLoad || !videoRef.current) return;
+    videoRef.current.load();
+    videoRef.current.play().catch(() => undefined);
+  }, [shouldLoad]);
 
   const pauseVideo = () => videoRef.current?.pause();
   const resumeVideo = () => videoRef.current?.play().catch(() => undefined);
 
+  return <article ref={cardRef} className="reveal group overflow-hidden border border-[#082b54]/12 bg-white shadow-[0_18px_48px_rgba(8,43,84,.08)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_65px_rgba(8,43,84,.15)]">
+    <div
+      className="relative aspect-[9/13] touch-pan-y select-none overflow-hidden bg-[#061f3d] outline-none focus-visible:ring-2 focus-visible:ring-[#d6a62a]"
+      tabIndex={0}
+      aria-label={`${video.title}. Continuously looping project video ${index + 1} of ${projectVideos.length}. Press and hold to pause.`}
+      onPointerDown={(event) => { event.currentTarget.setPointerCapture(event.pointerId); pauseVideo(); }}
+      onPointerUp={resumeVideo}
+      onPointerCancel={resumeVideo}
+      onLostPointerCapture={resumeVideo}
+      onKeyDown={(event) => { if ((event.key === ' ' || event.key === 'Enter') && !event.repeat) { event.preventDefault(); pauseVideo(); } }}
+      onKeyUp={(event) => { if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); resumeVideo(); } }}
+      onContextMenu={(event) => event.preventDefault()}
+    >
+      <video ref={videoRef} autoPlay muted loop playsInline preload="none" poster={video.poster} onCanPlay={resumeVideo} onError={() => setFailed(true)} className="pointer-events-none h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]">
+        {shouldLoad && <><source src={video.webm} type="video/webm" /><source src={video.src} type="video/mp4" /></>}
+        Your browser does not support embedded video.
+      </video>
+      {failed && <div className="absolute inset-0"><img src={video.poster} alt={`${video.title} video preview`} className="h-full w-full object-cover" /></div>}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#061f3d]/92 via-[#061f3d]/25 to-transparent px-4 pb-4 pt-20">
+        <span className="text-[10px] font-bold uppercase tracking-[.14em] text-[#d6a62a]">Looping project view · {String(index + 1).padStart(2, '0')}</span>
+      </div>
+    </div>
+    <div className="p-5">
+      <h3 className="font-display text-lg font-bold text-[#082b54]">{video.title}</h3>
+      <p className="mt-2 text-sm leading-6 text-[#5b6470]">{video.description}</p>
+    </div>
+  </article>;
+}
+
+function VideoShowroom() {
   return <section className="grid-blueprint bg-[#f5f7fa] py-20 md:py-28">
     <div className="container-wide">
       <div className="reveal grid gap-8 border-b border-[#082b54]/15 pb-8 lg:grid-cols-[1fr_.65fr] lg:items-end">
         <div><SectionLabel>Project videos</SectionLabel><h2 className="mt-5 max-w-[760px] font-display text-4xl font-extrabold tracking-[-.05em] text-[#082b54] md:text-6xl">See the details in <span className="font-editorial font-semibold italic text-[#a90000]">motion.</span></h2></div>
-        <p className="max-w-[470px] text-sm leading-7 text-[#5b6470]">Videos play in sequence and loop continuously. Press and hold the video to pause; release to continue.</p>
+        <p className="max-w-[470px] text-sm leading-7 text-[#5b6470]">Every project video plays independently and loops continuously. Press and hold any video to inspect a frame; release to continue.</p>
       </div>
-      <div className="mt-10 grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
-        <div className="reveal mx-auto w-full max-w-[430px]">
-          <div
-            className="relative aspect-[9/16] touch-pan-y select-none overflow-hidden bg-[#061f3d] shadow-[0_20px_55px_rgba(8,43,84,.18)] outline-none focus-visible:ring-2 focus-visible:ring-[#d6a62a]"
-            tabIndex={0}
-            aria-label={`${active.title}. Video ${activeIndex + 1} of ${projectVideos.length}. Press and hold to pause.`}
-            onPointerDown={(event) => { event.currentTarget.setPointerCapture(event.pointerId); pauseVideo(); }}
-            onPointerUp={resumeVideo}
-            onPointerCancel={resumeVideo}
-            onLostPointerCapture={resumeVideo}
-            onKeyDown={(event) => { if ((event.key === ' ' || event.key === 'Enter') && !event.repeat) { event.preventDefault(); pauseVideo(); } }}
-            onKeyUp={(event) => { if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); resumeVideo(); } }}
-            onContextMenu={(event) => event.preventDefault()}
-          >
-            <video ref={videoRef} key={active.src} autoPlay muted playsInline preload="metadata" poster={active.poster} onEnded={nextVideo} onError={() => setVideoFailed(true)} className="pointer-events-none h-full w-full object-cover">
-              {active.webm && <source src={active.webm} type="video/webm" />}
-              <source src={active.src} type="video/mp4" />
-              Your browser does not support embedded video.
-            </video>
-            {videoFailed && <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#061f3d] p-6 text-center text-white"><img src={active.poster} alt={`${active.title} video preview`} className="absolute inset-0 h-full w-full object-cover opacity-45" /><p className="relative z-10 text-sm font-bold">Video preview unavailable. Moving to the next video.</p></div>}
-            <div className="pointer-events-none absolute right-3 top-3 z-20 rounded-[2px] bg-white/85 p-1 shadow-md"><img src={logoPath} alt="" aria-hidden="true" className="w-16 sm:w-20" /></div>
-          </div>
-          <div className="bg-[#082b54] px-5 py-5 text-white">
-            <div className="eyebrow text-[#d6a62a]">Now showing · {String(activeIndex + 1).padStart(2, '0')}</div>
-            <h3 className="mt-2 font-display text-xl font-bold">{active.title}</h3>
-            <p className="mt-2 text-sm leading-6 text-white/60">{active.description}</p>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {projectVideos.map((video, index) => <button key={video.src} type="button" onClick={() => setActiveIndex(index)} aria-label={`Play ${video.title}`} aria-pressed={activeIndex === index} className={`reveal group relative aspect-[9/14] overflow-hidden border-2 bg-[#082b54] text-left transition-all ${activeIndex === index ? 'border-[#d6a62a] shadow-[0_12px_30px_rgba(8,43,84,.16)]' : 'border-transparent hover:border-[#082b54]/30'}`}>
-            <img src={video.poster} alt={`${video.title} video thumbnail`} loading="lazy" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = logoPath; }} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-            <span className="absolute inset-0 bg-gradient-to-t from-[#061f3d]/90 via-[#061f3d]/10 to-transparent" />
-            <span className="absolute left-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-[#d6a62a] text-[#082b54] shadow-md"><Play size={15} fill="currentColor" /></span>
-            <span className="absolute inset-x-0 bottom-0 z-10 p-3"><span className="block text-[10px] font-bold uppercase tracking-[.12em] text-[#d6a62a]">Video {String(index + 1).padStart(2, '0')}</span><span className="mt-1 block font-display text-sm font-bold leading-tight text-white">{video.title}</span></span>
-          </button>)}
-        </div>
+      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {projectVideos.map((video, index) => <LoopingProjectVideo key={video.src} video={video} index={index} />)}
       </div>
     </div>
   </section>;
@@ -329,6 +336,7 @@ function Home() {
     <section className="relative isolate flex min-h-[650px] items-end overflow-hidden bg-[#082b54]"><div className="absolute inset-0 -z-10 overflow-hidden"><video autoPlay muted loop playsInline preload="metadata" poster={galleryImages[14].src} aria-hidden="true" className="hero-art h-full w-full object-cover opacity-65"><source src={`${import.meta.env.BASE_URL}video/mercury-hero.webm`} type="video/webm" /><source src={`${import.meta.env.BASE_URL}video/mercury-hero.mp4`} type="video/mp4" /></video><ImageWatermark large top /><div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,43,84,.98)_0%,rgba(8,43,84,.72)_55%,rgba(8,43,84,.25)_100%)]" /><div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,43,84,.9)_0%,transparent_65%)]" /></div><div className="container-wide w-full pb-16 pt-24 md:pb-24"><div className="max-w-[780px]"><div className="reveal eyebrow flex items-center gap-3 text-[#d6a62a]"><span className="h-px w-10 bg-[#d6a62a]" />Professional Interior &amp; Exterior Finishing Specialists</div><h1 className="reveal reveal-delay-1 mt-6 font-display text-[clamp(3.5rem,9vw,7.6rem)] font-extrabold leading-[.93] tracking-[-.07em] text-white">Building <span className="font-editorial font-semibold italic text-[#d6a62a]">Beautiful</span> Spaces.</h1><p className="reveal reveal-delay-2 mt-7 max-w-[565px] text-base leading-7 text-white/72 md:text-lg">{description}</p><div className="reveal reveal-delay-3 mt-9 flex flex-col gap-3 sm:flex-row"><QuoteButton /><WhatsAppButton /></div></div><div className="mt-16 border-t border-white/20 pt-5 text-xs uppercase tracking-[.18em] text-white/55">Port Harcourt · Rivers State · Nigeria</div></div></section>
     <section className="bg-[#d6a62a] py-9"><div className="container-wide grid gap-7 md:grid-cols-[1.25fr_2fr] md:items-center"><div className="font-editorial text-2xl leading-tight text-[#082b54] md:text-3xl">Professional solutions.<br /><span className="italic">Beautiful results.</span></div><div className="grid grid-cols-2 gap-4 border-l border-[#082b54]/25 pl-5 text-[12px] font-bold uppercase tracking-[.08em] text-[#082b54] sm:grid-cols-4">{['Quality Workmanship', 'Professional Delivery', 'Reliable Supply', 'Client-Focused Service'].map((item) => <div key={item} className="flex gap-2"><Check size={15} className="shrink-0 text-[#a90000]" />{item}</div>)}</div></div></section>
     <section className="grid-blueprint py-24 md:py-32"><div className="container-wide grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-center"><div className="reveal"><SectionLabel>Introduction</SectionLabel><h2 className="mt-5 font-display text-4xl font-extrabold leading-[1.04] tracking-[-.05em] text-[#082b54] md:text-6xl">A considered partner for <span className="font-editorial font-semibold italic text-[#a90000]">better spaces.</span></h2></div><div className="reveal reveal-delay-1"><p className="max-w-[620px] text-[15px] leading-7 text-[#4b5563]">Mercury Décor Limited provides practical solutions for residential, commercial and corporate projects — combining quality workmanship, reliable materials and professional service delivery.</p><AppLink href="/about" data-testid="link-home-about" className="mt-8 inline-flex items-center gap-3 border-b-2 border-[#a90000] pb-2 text-sm font-extrabold text-[#082b54]">About Mercury Décor <ArrowRight size={16} /></AppLink></div></div><div className="mt-14 grid gap-3 sm:grid-cols-3">{[galleryImages[0], galleryImages[3], galleryImages[13]].map((image) => <div key={image.src} className="reveal relative overflow-hidden bg-[#dce4ec]"><img src={image.src} alt={image.alt} loading="lazy" className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 hover:scale-105" /><ImageWatermark /></div>)}</div></section>
+    <section className="overflow-hidden bg-white py-20 md:py-28"><div className="container-wide"><div className="reveal grid gap-7 border-b border-[#082b54]/15 pb-8 lg:grid-cols-[1fr_.7fr] lg:items-end"><div><SectionLabel>Project confidence</SectionLabel><h2 className="mt-5 max-w-[760px] font-display text-4xl font-extrabold tracking-[-.05em] text-[#082b54] md:text-6xl">A clear path from brief to <span className="font-editorial font-semibold italic text-[#a90000]">finished space.</span></h2></div><p className="max-w-[430px] text-sm leading-7 text-[#5b6470]">A strong result starts with clear requirements, considered material choices and coordinated execution. Mercury Décor supports each stage with practical attention to the details that shape the final finish.</p></div><div className="mt-8 grid border-l border-t border-[#082b54]/12 sm:grid-cols-2 lg:grid-cols-4">{[['01', 'Understand the brief', 'Project requirements, priorities and intended outcomes are clarified first.', ClipboardList], ['02', 'Plan the solution', 'Materials, finishing choices and practical project needs are considered.', Ruler], ['03', 'Coordinate delivery', 'Supply, logistics and on-site requirements are aligned around the work.', Truck], ['04', 'Finish with care', 'The final details are approached with workmanship and presentation in mind.', Check]].map(([number, title, text, Icon]) => { const StepIcon = Icon as LucideIcon; return <article key={title as string} className="contract-step reveal min-h-[250px] border-b border-r border-[#082b54]/12 p-6 transition-colors hover:bg-[#f8fafc]"><div className="flex items-center justify-between"><span className="font-mono text-xs font-bold text-[#a90000]">{number as string}</span><StepIcon size={20} strokeWidth={1.5} className="text-[#d6a62a]" /></div><h3 className="mt-16 font-display text-xl font-bold text-[#082b54]">{title as string}</h3><p className="mt-3 text-sm leading-6 text-[#5b6470]">{text as string}</p></article>; })}</div><div className="reveal mt-9 flex flex-col justify-between gap-5 border-l-4 border-[#d6a62a] bg-[#082b54] p-6 text-white sm:flex-row sm:items-center md:p-8"><div><div className="eyebrow text-[#d6a62a]">Planning a project?</div><p className="mt-2 max-w-[640px] text-sm leading-6 text-white/65">Share the scope, location and service required. Your details will be prepared for a transparent WhatsApp handoff.</p></div><QuoteButton /></div></div></section>
     <ShowroomPreview />
     <VideoShowroom />
     <section className="bg-[#082b54] py-24 text-white md:py-32"><div className="container-wide"><div className="reveal flex items-end justify-between gap-6 border-b border-white/15 pb-9"><div><SectionLabel light>Selected services</SectionLabel><h2 className="mt-5 font-display text-4xl font-extrabold tracking-[-.05em] md:text-6xl">The work behind the <span className="font-editorial font-semibold italic text-[#d6a62a]">finish.</span></h2></div><AppLink href="/services" data-testid="link-home-services" className="hidden items-center gap-2 text-sm font-bold text-[#d6a62a] sm:flex">All services <ArrowRight size={15} /></AppLink></div><div className="mt-10 grid gap-px overflow-hidden bg-white/15 md:grid-cols-3">{services.slice(0, 3).map((service) => { const Icon = service.icon; return <article key={service.title} className="reveal flex min-h-[265px] flex-col bg-[#0b3769] p-7 transition-colors hover:bg-[#114579]"><Icon size={23} className="text-[#d6a62a]" /><div className="mt-auto"><h3 className="font-display text-xl font-bold">{service.title}</h3><p className="mt-3 text-sm leading-6 text-white/58">{service.short}</p></div></article>; })}</div><AppLink href="/catalogs" data-testid="link-home-catalogs" className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-[#d6a62a] sm:hidden">Explore catalogs <ArrowRight size={15} /></AppLink></div></section>
