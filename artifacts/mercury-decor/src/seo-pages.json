@@ -1,0 +1,44 @@
+{
+  "/": {
+    "title": "Interior & Exterior Finishing in Port Harcourt | Mercury Décor",
+    "description": "Mercury Décor Limited provides interior and exterior finishing, construction, procurement, logistics and contracting services in Port Harcourt, Nigeria.",
+    "eyebrow": "Interior and exterior finishing specialists",
+    "priority": "1.0",
+    "changefreq": "weekly"
+  },
+  "/about": {
+    "title": "About Mercury Décor Limited | Port Harcourt, Nigeria",
+    "description": "Learn about Mercury Décor Limited, a Port Harcourt company delivering professional finishing, construction, procurement and project support services.",
+    "eyebrow": "About Mercury Décor Limited",
+    "priority": "0.8",
+    "changefreq": "monthly"
+  },
+  "/services": {
+    "title": "Finishing & Construction Services in Port Harcourt",
+    "description": "Explore interior finishing, ceilings, installation, procurement, logistics and general contracting services from Mercury Décor Limited in Port Harcourt.",
+    "eyebrow": "Finishing and construction services",
+    "priority": "0.9",
+    "changefreq": "monthly"
+  },
+  "/catalogs": {
+    "title": "Finishing & Building Project Gallery | Mercury Décor",
+    "description": "View Mercury Décor Limited's visual catalog of interior finishes, ceiling details, installations and completed building environments in Nigeria.",
+    "eyebrow": "Project gallery and catalogs",
+    "priority": "0.8",
+    "changefreq": "weekly"
+  },
+  "/industries": {
+    "title": "Residential & Commercial Project Support | Mercury Décor",
+    "description": "Mercury Décor supports residential, commercial, corporate and construction projects with finishing, materials, logistics and contracting services.",
+    "eyebrow": "Industries we serve",
+    "priority": "0.8",
+    "changefreq": "monthly"
+  },
+  "/contact": {
+    "title": "Contact Mercury Décor Limited | Request a Quote",
+    "description": "Contact Mercury Décor Limited in Elekahia, Port Harcourt to discuss finishing, construction, procurement, supply, logistics or contracting requirements.",
+    "eyebrow": "Contact and project enquiries",
+    "priority": "0.9",
+    "changefreq": "monthly"
+  }
+}

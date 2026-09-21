@@ -140,6 +140,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .reveal-delay-3 { transition-delay: .24s; }
 .hero-art { animation: heroDrift 18s ease-in-out infinite alternate; }
 @keyframes heroDrift { from { transform: scale(1.03) translate3d(0,0,0); } to { transform: scale(1.1) translate3d(-1.2%, -1%, 0); } }
+@keyframes showroomFade { from { opacity: .35; transform: scale(1.025); } to { opacity: 1; transform: scale(1); } }
+@keyframes showroomProgress { from { width: 0; } to { width: 100%; } }
+.showroom-image { animation: showroomFade .7s ease both; }
+.showroom-progress { animation: showroomProgress 5s linear both; }
+.showroom-progress.paused { animation-play-state: paused; }
 @keyframes pulseLine { 0%,100% { transform: scaleX(.75); opacity: .45; } 50% { transform: scaleX(1); opacity: 1; } }
 .pulse-line { animation: pulseLine 3s ease-in-out infinite; transform-origin: left; }
 .hide-scrollbar::-webkit-scrollbar { display: none; }
