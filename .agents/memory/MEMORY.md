@@ -1,0 +1,1 @@
+- [Project video compatibility](project-video-compatibility.md) — Keep WebM before MP4 for every project video; some Chromium builds cannot decode otherwise valid H.264 uploads.

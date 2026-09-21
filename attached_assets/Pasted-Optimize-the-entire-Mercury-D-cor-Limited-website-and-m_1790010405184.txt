@@ -1,0 +1,30 @@
+Optimize the entire Mercury Décor Limited website and make it fully production-ready for deployment on Render.
+
+Make all uploaded videos autoplay, muted, loop continuously, play inline on mobile, and run non-stop. Where multiple videos are used in a section, play them sequentially one after another automatically, then return to the first video and continue indefinitely without stopping. Remove all visible pause/play controls and unnecessary video controls. Use the provided preview images as video poster/fallback images. If a video fails to load or autoplay, gracefully display its corresponding image instead. Apply this behavior to videos across the homepage and all other pages.
+
+Replace the floating WhatsApp text button with a clean circular WhatsApp icon only. Keep it fixed at the bottom-right on every page, with a subtle hover animation and accessible aria-label. Connect it to +2348082277274 with this pre-filled message: “Hello Mercury Décor Limited, I would like to make an enquiry about your services.” Ensure all other WhatsApp buttons throughout the website also work correctly.
+
+Implement advanced modern SEO across the entire website. Create unique page titles and meta descriptions, proper H1-H6 hierarchy, canonical URLs, Open Graph metadata, Twitter/X metadata, optimized image alt text, internal linking, semantic HTML, sitemap.xml, robots.txt, structured data/schema markup, LocalBusiness/Organization schema, service schema where appropriate, local SEO signals, Google-friendly URLs, Core Web Vitals optimization, mobile SEO, optimized images, WebP/AVIF support where appropriate, lazy loading, fast loading, minimal JavaScript, optimized fonts, and proper indexing configuration. Target relevant searches naturally around Mercury Décor Limited's services in Port Harcourt and Rivers State without keyword stuffing. Do not make unrealistic guarantees about ranking #1 on Google.
+
+Use the following verified business information consistently throughout the website:
+
+Mercury Décor Limited
+131 Circular Road, Elekahia Housing Estate, Port Harcourt, Rivers State, Nigeria
+Email: silnice873@gmail.com
+Phone/WhatsApp: +2348082277274
+
+Audit and optimize the entire website for mobile, tablet, laptop, desktop and large screens. Fix all responsive issues, overlapping elements, broken layouts, horizontal scrolling, incorrect image sizing, video issues and navigation problems.
+
+Verify every interactive element works: navigation, mobile menu, buttons, forms, catalog links, service links, WhatsApp, phone links, email links, internal routes, external links, image galleries and video components. Remove every dead link, placeholder button, console error, broken route and unnecessary development code.
+
+Make the quote/contact forms fully functional with proper validation, error handling and success states. Ensure no sensitive keys or secrets are exposed in frontend code and use environment variables correctly.
+
+Optimize the application for production performance and reliability. Compress and optimize images and videos, lazy-load below-the-fold media, reduce unnecessary JavaScript, optimize CSS and fonts, use caching where appropriate, and prevent unnecessary API requests.
+
+Prepare the entire application for Render deployment. Ensure the production build succeeds, the production server starts correctly, all environment variables are properly configured, no localhost URLs remain, all assets and API routes work in production, sitemap.xml and robots.txt are accessible, and the website remains stable after restarts or redeployments.
+
+Do not use artificial keep-alive/ping mechanisms. Instead, configure the application correctly for reliable production operation and graceful recovery after restarts.
+
+Before finishing, perform a complete production audit covering functionality, responsiveness, SEO, accessibility, performance, security, videos, images, forms, WhatsApp, navigation, broken links, console errors and Render deployment readiness.
+
+The final result must be a polished, modern, fully functional, SEO-optimized and production-ready Mercury Décor Limited website that can be deployed directly to Render.

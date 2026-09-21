@@ -1,0 +1,19 @@
+Deep-audit and fully fix the entire website/codebase. Implement and verify all changes directly—do not just report issues.
+
+1. **Continuous Media:** Uploaded videos/photos must automatically play/display sequentially, continuously and loop indefinitely across all relevant pages: `Media 1 → Media 2 → Media 3 → … → Last → First`. No visible Pause button. **Press-and-hold on the photo/video pauses; release resumes exactly where it stopped.** Support touch, tablet, and mouse; prevent accidental navigation/interaction during hold.
+
+2. **Video Previews:** Ensure every uploaded video displays its correct thumbnail/preview image everywhere it appears. Add reliable fallbacks and proper image `alt` text. Fix broken/missing previews.
+
+3. **WhatsApp:** Replace the floating WhatsApp text button with a proper WhatsApp icon. Keep it responsive, accessible, correctly linked, and non-obstructive.
+
+4. **Advanced SEO:** Implement modern technical SEO across the entire site: unique titles/descriptions, canonical URLs, semantic headings, Open Graph/Twitter metadata, structured data/schema, video/article/breadcrumb schema where applicable, SEO-friendly URLs, internal linking, optimized images/alt text, sitemap, robots.txt, correct indexing directives, 404 handling, mobile SEO, Core Web Vitals, caching/performance, and correct HTTP status codes. Generate metadata dynamically from actual content. Do not use spammy SEO or guarantee rankings.
+
+5. **Full Audit:** Fix all critical/high-priority frontend, backend, API, database, routing, authentication, forms, media, accessibility, responsiveness, security, performance, console/runtime, and UX issues. Remove broken/placeholder functionality and fake data.
+
+6. **Render Production:** Make the application fully production-ready for Render. Verify build/start commands, port/host binding, environment variables, database, storage/uploads, static files, CORS, dependencies, health checks, logging, error handling, memory/CPU usage, and graceful startup/shutdown. Fix the root causes of deployment failures and restart loops.
+
+7. **Always Alive:** Maximize reliability within the Render plan. Do not use fake traffic or policy-violating keep-alive tricks. Fix crashes, uncaught exceptions, resource problems, and service failures so the app remains stable.
+
+8. **Verify:** Build, test, run production locally, test every major route and media flow, verify SEO/robots/sitemap/schema, check console/server logs, test mobile/desktop, deploy to Render, and verify the live deployment remains stable.
+
+**Do not stop at analysis. Implement everything, test everything, fix discovered issues, and leave the codebase production-ready. Only report completion after verification.**
