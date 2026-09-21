@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "Y9NAK2BJR-ifgZXvZAn8l"
+uri = "file://artifacts/mercury-decor/public/video/mercury-hero-cinematic.mp4"
+type = "video"
+title = "Mercury Décor Cinematic Hero Video"
+description = "Optimized 8-second 16:9 architectural hero video used on the Mercury Décor homepage."
+logical_id = "6b8011f2-2581-4344-8189-7f4c7aa04d30"
+content_hash = "sha256:f1200e03a8ad260e38ae9bfbff0857209cc4064e12c7a97f44b052ec7963f03e"
+size = 1100401
+mtime_ms = 1790012947941
+storage_uri = "gcs://replit-rams-assets-picard/rams/assets/repl:de9d1cbe-cc40-41b0-809d-0e958b5d5285/6b8011f2-2581-4344-8189-7f4c7aa04d30/9e06f71d-2879-4626-b577-d29b87adfe72"
+storage_version_token = "1790013046563496"
+content_type = "video/mp4"
