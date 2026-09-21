@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Mercury Décor Limited"
+description = "A premium responsive corporate website for Mercury Décor Limited, a Nigerian interior and exterior finishing, construction, procurement, supply and project support company."
+version = "1.0.0"
+id = "artifacts/mercury-decor"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25612
+
+[services.development]
+run = "pnpm --filter @workspace/mercury-decor run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mercury-decor", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/mercury-decor/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25612"
+BASE_PATH = "/"

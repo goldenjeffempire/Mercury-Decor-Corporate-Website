@@ -1,0 +1,782 @@
+Build a premium, modern, responsive corporate website for a Nigerian construction and interior/exterior finishing company called:
+
+MERCURY DÉCOR LIMITED
+
+Brand positioning:
+Professional Interior & Exterior Finishing Specialists
+
+Core message:
+“Building Beautiful Spaces.”
+
+BUSINESS INFORMATION
+--------------------
+Company Name: Mercury Décor Limited
+
+Office Address:
+131 Circular Road,
+Elekahia Housing Estate,
+Port Harcourt, Rivers State, Nigeria
+
+Email:
+silnice873@gmail.com
+
+Phone:
++234 808 227 7274
+
+WhatsApp:
+Use +2348082277274 for all WhatsApp CTAs.
+
+IMPORTANT:
+Do not invent company information, statistics, certifications, awards, years of experience, clients, completed projects, testimonials, staff members or claims that have not been provided.
+
+==================================================
+DESIGN DIRECTION
+==================================================
+
+Create a premium corporate website that combines:
+
+- Construction
+- Architecture
+- Interior finishing
+- Exterior finishing
+- Building services
+- Procurement
+- Supply
+- Logistics
+
+The website should look like a serious professional Nigerian company capable of serving residential, commercial and corporate clients.
+
+Do NOT make it look like a small generic decoration website.
+
+Visual style:
+
+- Premium
+- Corporate
+- Modern
+- Clean
+- Architectural
+- Professional
+- Trustworthy
+- Spacious
+- High-end construction aesthetic
+
+Use the company's logo as the primary brand identity if the supplied logo asset is available.
+
+COLOR PALETTE:
+
+Primary Navy:
+#082B54
+
+Deep Red:
+#A90000
+
+Gold:
+#D6A62A
+
+White:
+#FFFFFF
+
+Light Grey:
+#F5F7FA
+
+Dark Text:
+#111827
+
+Use navy as the dominant color.
+Use gold as an accent.
+Use red selectively for important brand elements and highlights.
+
+Typography should be modern, elegant and highly readable.
+
+Use large editorial-style headings, clean spacing, subtle borders and premium cards.
+
+==================================================
+TECHNOLOGY
+==================================================
+
+Build using:
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Modern component architecture
+- Lucide icons
+- Framer Motion for subtle animations
+
+The website must be:
+
+- Fully responsive
+- Mobile-first
+- Fast loading
+- SEO-friendly
+- Accessible
+- Secure
+- Production-ready
+- Easy to maintain
+
+Avoid unnecessary dependencies.
+
+==================================================
+NAVIGATION
+==================================================
+
+Desktop navigation:
+
+LOGO
+
+Home
+About
+Services
+Catalogs
+Industries
+Contact
+
+CTA:
+Request a Quote
+
+Secondary CTA:
+WhatsApp
+
+On mobile use a clean hamburger menu.
+
+The navigation should be sticky while scrolling.
+
+==================================================
+HERO SECTION
+==================================================
+
+Create a visually powerful full-width hero section.
+
+Headline:
+
+“Building Beautiful Spaces.”
+
+Eyebrow:
+
+“PROFESSIONAL INTERIOR & EXTERIOR FINISHING SPECIALISTS”
+
+Supporting text:
+
+“Mercury Décor Limited delivers professional interior and exterior finishing, construction, procurement, supply and project support solutions for residential, commercial and corporate projects.”
+
+Primary CTA:
+
+“Request a Quote”
+
+Secondary CTA:
+
+“Chat on WhatsApp”
+
+The WhatsApp button must open WhatsApp using:
+
++2348082277274
+
+Use a high-quality architectural/construction/interior-finishing background image.
+
+The hero should have a sophisticated dark overlay so text remains readable.
+
+Add subtle entrance animations.
+
+==================================================
+TRUST / INTRODUCTION SECTION
+==================================================
+
+Create a compact section immediately below the hero.
+
+Heading:
+
+“Professional Solutions. Beautiful Results.”
+
+Briefly introduce Mercury Décor Limited as a company providing finishing, construction, procurement, supply and support services.
+
+Use four visual highlights:
+
+- Quality Workmanship
+- Professional Delivery
+- Reliable Supply
+- Client-Focused Service
+
+Do not assign numerical statistics unless provided.
+
+==================================================
+ABOUT SECTION
+==================================================
+
+Heading:
+
+“About Mercury Décor Limited”
+
+Content:
+
+“Mercury Décor Limited is a Nigerian company specializing in professional interior and exterior finishing, construction, procurement, supply and project support services.
+
+We provide practical solutions for residential, commercial and corporate projects, combining quality workmanship, reliable materials and professional service delivery.”
+
+Include a large architectural/interior image alongside the text.
+
+CTA:
+
+“Learn More About Us”
+
+==================================================
+SERVICES SECTION
+==================================================
+
+Heading:
+
+“Our Services”
+
+Subtitle:
+
+“Professional solutions for construction, finishing, supply and project support.”
+
+Create six premium service categories.
+
+--------------------------------------------------
+1. INTERIOR & EXTERIOR FINISHING
+--------------------------------------------------
+
+Services:
+
+- Painting
+- Wall Screeding
+- Tiling
+- Marble-Effect Finishes
+- Graze Finishes
+- 3D Wall Panels
+- Stamped Flooring
+
+Description:
+
+“Professional finishing solutions designed to transform interior and exterior spaces with quality materials and refined workmanship.”
+
+--------------------------------------------------
+2. CEILING & DECORATIVE WORKS
+--------------------------------------------------
+
+Services:
+
+- POP Ceilings
+- Plasterboard Ceilings
+- Skim Ceilings
+- Decorative Ceiling Designs
+
+Description:
+
+“Modern ceiling and decorative solutions designed to enhance the appearance, character and functionality of your space.”
+
+--------------------------------------------------
+3. BUILDING & INSTALLATION
+--------------------------------------------------
+
+Services:
+
+- Roofing
+- Window Hoods
+- Handrails
+- Building & Installation
+- Plumbing
+
+Description:
+
+“Reliable building and installation services supporting residential, commercial and corporate projects.”
+
+--------------------------------------------------
+4. PROCUREMENT & SUPPLY
+--------------------------------------------------
+
+Services:
+
+- Building Materials
+- Construction Materials
+- General Procurement
+- Chippings Supply
+
+Description:
+
+“Procurement and supply solutions helping clients source essential materials for their construction and development requirements.”
+
+--------------------------------------------------
+5. LOGISTICS & SUPPORT
+--------------------------------------------------
+
+Services:
+
+- Logistics
+- Warehousing
+- Inventory Management
+- Cargo Inspection
+
+Description:
+
+“Supporting efficient movement, storage, inspection and management of goods and construction materials.”
+
+--------------------------------------------------
+6. GENERAL CONTRACTING
+--------------------------------------------------
+
+Services:
+
+- Residential Projects
+- Commercial Projects
+- Corporate Projects
+- General Contract Services
+
+Description:
+
+“Flexible contracting solutions for different project requirements, from residential developments to commercial and corporate spaces.”
+
+Each service category should have:
+
+- Premium icon
+- Short description
+- Service list
+- “Request a Quote” CTA
+- “Ask on WhatsApp” CTA
+
+==================================================
+CATALOGS SECTION
+==================================================
+
+IMPORTANT:
+Do NOT call this section “Projects”.
+
+The website should use:
+
+“CATALOGS”
+
+instead.
+
+Heading:
+
+“Our Catalogs”
+
+Subtitle:
+
+“Explore our range of finishing, building and construction solutions.”
+
+Create a visual catalog/grid system.
+
+Catalog categories:
+
+1. Interior & Exterior Finishing
+2. Ceiling & Decorative Works
+3. Building & Installation
+4. Procurement & Supply
+
+Each catalog card should include:
+
+- Large image
+- Category name
+- Short description
+- “View Catalog”
+- “Request a Quote”
+
+The catalog should feel like a digital showroom.
+
+Do not invent product prices.
+
+Do not invent product specifications.
+
+Do not invent brands.
+
+Use placeholder imagery only where actual company images are not yet available, and structure the components so real company images can easily be added later.
+
+==================================================
+INDUSTRIES SECTION
+==================================================
+
+Heading:
+
+“Industries We Serve”
+
+Create four cards:
+
+Residential
+Commercial
+Corporate
+Construction
+
+Descriptions should be concise and professional.
+
+Do not claim specific major clients.
+
+==================================================
+WHY CHOOSE US
+==================================================
+
+Heading:
+
+“Why Choose Mercury Décor?”
+
+Use four benefits:
+
+1. Quality Workmanship
+2. Professional Delivery
+3. Reliable Supply
+4. Client-Focused Service
+
+Use clean icons and subtle animations.
+
+Avoid unsupported claims such as:
+
+“#1 construction company”
+“Best in Nigeria”
+“10+ years experience”
+“500+ projects”
+
+unless such information is later provided by the company.
+
+==================================================
+REQUEST A QUOTE
+==================================================
+
+Create a strong full-width CTA section.
+
+Heading:
+
+“Have a Project in Mind?”
+
+Text:
+
+“Tell us what you need and our team will get back to you.”
+
+Button:
+
+“Request a Quote”
+
+Secondary:
+
+“Chat on WhatsApp”
+
+==================================================
+QUOTE FORM
+==================================================
+
+Create a professional quote form.
+
+Fields:
+
+Full Name *
+Company Name
+Phone Number *
+Email Address *
+Service Required *
+Project Type *
+Project Location *
+Project Description *
+Preferred Start Date
+Additional Information
+
+Service dropdown:
+
+- Interior & Exterior Finishing
+- Ceiling & Decorative Works
+- Building & Installation
+- Procurement & Supply
+- Logistics & Support
+- General Contracting
+
+Project type:
+
+- Residential
+- Commercial
+- Corporate
+- Other
+
+Submit button:
+
+“Submit Request”
+
+Show a professional success state after submission.
+
+For now, structure the form cleanly so it can later be connected to an email service, Supabase or another backend.
+
+==================================================
+WHATSAPP INTEGRATION
+==================================================
+
+WhatsApp is a major conversion channel.
+
+Create a floating WhatsApp button visible on every page.
+
+Position:
+Bottom-right.
+
+Text:
+
+“Chat on WhatsApp”
+
+WhatsApp number:
+
++2348082277274
+
+Use a pre-filled message:
+
+“Hello Mercury Décor Limited, I would like to make an enquiry about your services.”
+
+For service-specific WhatsApp buttons, dynamically generate messages such as:
+
+“Hello Mercury Décor Limited, I am interested in your [SERVICE NAME]. I would like to request more information and a quotation.”
+
+WhatsApp should open correctly on both mobile and desktop.
+
+Also include WhatsApp CTAs:
+
+- Hero
+- Services
+- Catalogs
+- Contact
+- Footer
+
+Do not make the floating button obstruct important mobile content.
+
+==================================================
+CONTACT SECTION
+==================================================
+
+Heading:
+
+“Let’s Talk About Your Project”
+
+Display:
+
+Mercury Décor Limited
+
+Address:
+
+131 Circular Road,
+Elekahia Housing Estate,
+Port Harcourt,
+Rivers State, Nigeria
+
+Email:
+
+silnice873@gmail.com
+
+Phone:
+
++234 808 227 7274
+
+Add:
+
+- Click-to-call
+- Click-to-email
+- WhatsApp
+- Google Maps
+
+Create a map area for the office location.
+
+Do not fabricate GPS coordinates.
+
+==================================================
+FOOTER
+==================================================
+
+Footer should contain:
+
+Mercury Décor Limited
+
+“Professional Interior & Exterior Finishing Specialists”
+
+Navigation:
+
+Home
+About
+Services
+Catalogs
+Industries
+Contact
+
+Services:
+
+Interior & Exterior Finishing
+Ceiling & Decorative Works
+Building & Installation
+Procurement & Supply
+Logistics & Support
+General Contracting
+
+Contact:
+
+131 Circular Road,
+Elekahia Housing Estate,
+Port Harcourt,
+Rivers State, Nigeria
+
+silnice873@gmail.com
+
++234 808 227 7274
+
+WhatsApp
+
+Include copyright:
+
+“© 2026 Mercury Décor Limited. All Rights Reserved.”
+
+==================================================
+RESPONSIVE DESIGN
+==================================================
+
+The website must work perfectly on:
+
+- Small mobile phones
+- Large mobile phones
+- Tablets
+- Laptops
+- Desktop monitors
+
+Mobile navigation must be excellent.
+
+Buttons must be easy to tap.
+
+Typography must scale properly.
+
+Images must be optimized.
+
+Avoid horizontal scrolling.
+
+==================================================
+ANIMATIONS
+==================================================
+
+Use subtle professional animations:
+
+- Fade-in sections
+- Smooth reveal on scroll
+- Slight image zoom
+- Card hover effects
+- Button hover transitions
+- Smooth navigation
+- Hero entrance animation
+
+Do NOT overuse animations.
+
+The website should feel premium rather than flashy.
+
+==================================================
+SEO
+==================================================
+
+Set the website title:
+
+“Mercury Décor Limited | Interior & Exterior Finishing Specialists”
+
+Meta description:
+
+“Mercury Décor Limited provides professional interior and exterior finishing, construction, procurement, supply, logistics and general contracting services in Port Harcourt, Rivers State, Nigeria.”
+
+Include relevant keywords naturally:
+
+- Interior finishing Port Harcourt
+- Exterior finishing Port Harcourt
+- Construction company Port Harcourt
+- Painting services Port Harcourt
+- Wall screeding Port Harcourt
+- Tiling services Port Harcourt
+- POP ceiling Port Harcourt
+- Building materials Port Harcourt
+- Procurement services Port Harcourt
+- General contracting Port Harcourt
+- Construction services Rivers State
+
+Create:
+
+- sitemap.xml
+- robots.txt
+- Open Graph metadata
+- Twitter/X metadata
+- Canonical URLs
+- Proper heading hierarchy
+- Image alt text
+- LocalBusiness structured data where appropriate
+
+==================================================
+PERFORMANCE
+==================================================
+
+Optimize for excellent Lighthouse scores.
+
+Use:
+
+- Next.js Image optimization
+- Lazy loading
+- Proper image sizing
+- Minimal JavaScript
+- Efficient components
+- Clean CSS
+- Semantic HTML
+
+Do not use unnecessarily large libraries.
+
+==================================================
+SECURITY
+==================================================
+
+Implement basic production security practices.
+
+Do not expose API keys.
+
+Validate all forms.
+
+Sanitize user input.
+
+Protect server-side endpoints.
+
+Use HTTPS-ready configuration.
+
+==================================================
+CONTENT RULES
+==================================================
+
+Do not invent:
+
+- Testimonials
+- Awards
+- Certifications
+- Statistics
+- Years of experience
+- Project history
+- Client logos
+- Employee names
+- Revenue
+- Number of customers
+
+Where content is not yet available, use elegant placeholders that can be replaced later.
+
+==================================================
+FINAL DESIGN REQUIREMENT
+==================================================
+
+The final website should look like a premium Nigerian corporate construction and finishing company website.
+
+It should NOT look like:
+
+- A generic template
+- A personal portfolio
+- A simple landing page
+- A furniture store
+- An e-commerce website
+
+It should communicate:
+
+PROFESSIONAL
+TRUSTWORTHY
+MODERN
+PREMIUM
+CONSTRUCTION
+FINISHING
+SUPPLY
+RELIABILITY
+
+Prioritize visual quality, spacing, typography, responsive behavior and conversion.
+
+The primary conversion actions throughout the website should be:
+
+“REQUEST A QUOTE”
+
+and
+
+“CHAT ON WHATSAPP”.
+
+Build the homepage first, then create the remaining pages using the same design system.
