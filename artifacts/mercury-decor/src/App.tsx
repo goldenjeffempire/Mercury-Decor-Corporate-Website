@@ -65,6 +65,14 @@ const services = [
   { number: '05', title: 'Logistics & Support', short: 'A dependable layer for movement, storage, inspection and material coordination.', description: 'Supporting efficient movement, storage, inspection and management of goods and construction materials.', items: ['Logistics', 'Warehousing', 'Inventory Management', 'Cargo Inspection'], icon: Truck },
   { number: '06', title: 'General Contracting', short: 'A flexible project partner for the scope, scale and type of work in front of you.', description: 'Flexible contracting solutions for different project requirements, from residential developments to commercial and corporate spaces.', items: ['Residential Projects', 'Commercial Projects', 'Corporate Projects', 'General Contract Services'], icon: Building2 },
 ] satisfies Array<{ number: string; title: string; short: string; description: string; items: string[]; icon: LucideIcon }>;
+const serviceVisuals = [
+  showroomImages[16],
+  showroomImages[0],
+  showroomImages[13],
+  showroomImages[2],
+  showroomImages[14],
+  showroomImages[17],
+];
 
 const catalogs = [
   { title: 'Interior & Exterior Finishing', category: 'SURFACES / 01', description: 'A considered range of finishing solutions for walls, floors and the character of a space.', image: galleryImages[0].src, icon: Ruler },
@@ -352,13 +360,41 @@ function About() {
   return <Shell title="About Mercury Décor Limited | Nigerian Finishing Specialists" path="/about"><PageHero eyebrow="About Mercury Décor Limited" title="A clear standard for every" italic="surface." text="Professional interior and exterior finishing, construction, procurement, supply and project support for residential, commercial and corporate projects." /><section className="grid-blueprint py-24 md:py-32"><div className="container-wide grid gap-14 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-24"><div className="reveal grid grid-cols-2 gap-3"><div className="relative col-span-2 overflow-hidden"><img src={galleryImages[0].src} alt={galleryImages[0].alt} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-[1.02]" /><ImageWatermark /></div><div className="relative overflow-hidden"><img src={galleryImages[5].src} alt={galleryImages[5].alt} loading="lazy" className="aspect-square w-full object-cover" /><ImageWatermark /></div><div className="relative overflow-hidden"><img src={galleryImages[10].src} alt={galleryImages[10].alt} loading="lazy" className="aspect-square w-full object-cover" /><ImageWatermark /></div></div><div className="reveal reveal-delay-1"><SectionLabel>The company</SectionLabel><h2 className="mt-5 font-display text-4xl font-extrabold leading-[1.04] tracking-[-.05em] text-[#082b54] md:text-6xl">Practical solutions.<br /><span className="font-editorial font-semibold italic text-[#a90000]">Professional delivery.</span></h2><div className="mt-7 max-w-[570px] space-y-5 text-[15px] leading-7 text-[#4b5563]"><p>Mercury Décor Limited is a Nigerian company specializing in professional interior and exterior finishing, construction, procurement, supply and project support services.</p><p>We provide practical solutions for residential, commercial and corporate projects, combining quality workmanship, reliable materials and professional service delivery.</p></div><div className="mt-9 flex flex-wrap gap-3"><QuoteButton /><WhatsAppButton /></div></div></div></section></Shell>;
 }
 
-function ServiceCard({ service, detailed = false }: { service: (typeof services)[number]; detailed?: boolean }) {
+function ServiceCard({ service, image, index }: { service: (typeof services)[number]; image: (typeof showroomImages)[number]; index: number }) {
   const Icon = service.icon;
-  return <article className={`reveal group flex flex-col bg-[#0b3769] p-7 text-white transition-colors hover:bg-[#114579] ${detailed ? 'min-h-[410px] md:p-9' : 'min-h-[280px]'}`}><div className="flex items-start justify-between"><div className="flex h-11 w-11 items-center justify-center border border-[#d6a62a]/55 text-[#d6a62a]"><Icon size={21} strokeWidth={1.5} /></div><span className="font-mono text-xs text-white/35">{service.number}</span></div><h2 className="mt-9 max-w-[350px] font-display text-2xl font-bold leading-tight tracking-[-.035em]">{service.title}</h2><p className="mt-4 max-w-[500px] text-sm leading-6 text-white/58">{detailed ? service.description : service.short}</p><div className="mt-auto border-t border-white/12 pt-5"><div className="flex flex-wrap gap-x-3 gap-y-2">{service.items.map((item) => <span key={item} className="text-[11px] text-white/65">{item}</span>)}</div><div className="mt-6 flex flex-wrap items-center gap-5"><QuoteButton service={service.title} /><WhatsAppButton compact label="Ask on WhatsApp" service={service.title} /></div></div></article>;
+  return <article className={`reveal reveal-delay-${(index % 3) + 1} group flex flex-col overflow-hidden border border-[#082b54]/12 bg-white shadow-[0_18px_45px_rgba(8,43,84,.07)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_26px_70px_rgba(8,43,84,.15)]`}>
+    <div className="relative aspect-[4/3] overflow-hidden bg-[#dce4ec]">
+      <img src={image.src} alt={`${service.title} visual example`} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+      <ImageWatermark />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#061f3d]/75 via-transparent to-transparent" />
+      <div className="absolute bottom-4 left-4 z-20 flex items-center gap-3 text-white"><span className="flex h-10 w-10 items-center justify-center border border-[#d6a62a]/70 bg-[#082b54]/85 text-[#d6a62a] backdrop-blur-sm"><Icon size={19} strokeWidth={1.5} /></span><span className="font-mono text-xs text-white/70">{service.number}</span></div>
+    </div>
+    <div className="flex flex-1 flex-col p-6 md:p-7">
+      <h2 className="max-w-[350px] font-display text-2xl font-bold leading-tight tracking-[-.035em] text-[#082b54]">{service.title}</h2>
+      <p className="mt-4 text-sm leading-6 text-[#5b6470]">{service.description}</p>
+      <div className="mt-6 grid gap-2 border-t border-[#082b54]/10 pt-5">{service.items.map((item) => <div key={item} className="flex items-center gap-2 text-xs font-semibold text-[#344154]"><Check size={13} className="shrink-0 text-[#a90000]" />{item}</div>)}</div>
+      <div className="mt-auto flex flex-wrap items-center gap-3 pt-7"><QuoteButton service={service.title} /><WhatsAppButton compact label="WhatsApp" service={service.title} /></div>
+    </div>
+  </article>;
 }
 
 function Services() {
-  return <Shell title="Services | Mercury Décor Limited" path="/services"><PageHero eyebrow="What we do" title="Built around your" italic="next conversation." text="Professional solutions for construction, finishing, supply and project support." /><section className="bg-[#082b54] py-16 md:py-24"><div className="container-wide grid gap-px overflow-hidden bg-white/15 md:grid-cols-2">{services.map((service) => <ServiceCard key={service.title} service={service} detailed />)}</div></section><section className="bg-[#d6a62a] py-16"><div className="container-wide flex flex-col justify-between gap-7 md:flex-row md:items-center"><div><div className="eyebrow text-[#a90000]">Ready when you are</div><h2 className="mt-3 font-display text-3xl font-extrabold tracking-[-.04em] text-[#082b54]">Tell us where the work starts.</h2></div><div className="flex flex-wrap gap-3"><QuoteButton /><WhatsAppButton /></div></div></section></Shell>;
+  return <Shell title="Services | Mercury Décor Limited" path="/services">
+    <PageHero eyebrow="What we do" title="Built around your" italic="next conversation." text="Professional solutions for construction, finishing, supply and project support." />
+    <section className="grid-blueprint bg-white py-20 md:py-28">
+      <div className="container-wide">
+        <div className="grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:items-end">
+          <div className="reveal"><SectionLabel>Service portfolio</SectionLabel><h2 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-[-.05em] text-[#082b54] md:text-6xl">Practical capability.<br /><span className="font-editorial font-semibold italic text-[#a90000]">Visible results.</span></h2></div>
+          <div className="reveal reveal-delay-1"><p className="max-w-[620px] text-[15px] leading-7 text-[#4b5563]">From the finish people see to the sourcing, movement and coordination behind it, our services support the practical requirements of residential, commercial, corporate and construction projects.</p><div className="mt-6 flex flex-wrap gap-2">{services.map((service) => <a key={service.number} href={`#service-${service.number}`} className="rounded-full border border-[#082b54]/15 bg-white px-3 py-2 text-[10px] font-bold uppercase tracking-[.08em] text-[#082b54] transition-colors hover:border-[#d6a62a] hover:bg-[#d6a62a]">{service.number} · {service.title}</a>)}</div></div>
+        </div>
+        <div className="mt-12 grid grid-cols-2 gap-3 lg:grid-cols-[1.35fr_.65fr_.65fr]">
+          {[serviceVisuals[0], serviceVisuals[2], serviceVisuals[5]].map((image, index) => <figure key={image.src} className={`reveal relative overflow-hidden bg-[#dce4ec] ${index === 0 ? 'col-span-2 min-h-[360px] lg:col-span-1 lg:row-span-1' : 'min-h-[220px] lg:min-h-[360px]'}`}><img src={image.src} alt={image.alt} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-105" /><ImageWatermark large={index === 0} top /><figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#061f3d]/85 to-transparent px-5 pb-5 pt-20 text-[10px] font-bold uppercase tracking-[.12em] text-white">{index === 0 ? 'Finishing and decorative capability' : index === 1 ? 'Built environment support' : 'Corporate and commercial vision'}</figcaption></figure>)}
+        </div>
+      </div>
+    </section>
+    <section className="bg-[#eef2f6] py-20 md:py-28"><div className="container-wide"><div className="reveal flex flex-col justify-between gap-6 border-b border-[#082b54]/15 pb-8 md:flex-row md:items-end"><div><SectionLabel>Explore each service</SectionLabel><h2 className="mt-5 font-display text-4xl font-extrabold tracking-[-.05em] text-[#082b54] md:text-6xl">What we can bring to <span className="font-editorial font-semibold italic text-[#a90000]">the project.</span></h2></div><p className="max-w-[390px] text-sm leading-7 text-[#5b6470]">Choose a service to request a focused quotation or start a direct WhatsApp conversation about your requirements.</p></div><div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">{services.map((service, index) => <div id={`service-${service.number}`} key={service.title} className="scroll-mt-28"><ServiceCard service={service} image={serviceVisuals[index]} index={index} /></div>)}</div></div></section>
+    <section className="relative overflow-hidden bg-[#d6a62a] py-16"><div className="absolute -right-24 -top-36 h-80 w-80 rounded-full border border-[#082b54]/15" /><div className="container-wide relative flex flex-col justify-between gap-7 md:flex-row md:items-center"><div><div className="eyebrow text-[#a90000]">Ready when you are</div><h2 className="mt-3 font-display text-3xl font-extrabold tracking-[-.04em] text-[#082b54] md:text-4xl">Tell us where the work starts.</h2><p className="mt-3 max-w-[560px] text-sm leading-6 text-[#082b54]/70">Share the service, project location and scope. We will prepare your details for a transparent WhatsApp handoff.</p></div><div className="flex flex-wrap gap-3"><QuoteButton /><WhatsAppButton /></div></div></section>
+  </Shell>;
 }
 
 function CatalogModal({ catalog, onClose }: { catalog: (typeof catalogs)[number]; onClose: () => void }) {
