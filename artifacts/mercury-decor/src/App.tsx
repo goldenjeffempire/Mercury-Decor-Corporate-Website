@@ -9,7 +9,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
-import logoPath from '../../../.local/conversation-workspace/files/attached_assets/WhatsApp_Image_2026-09-21_at_4.30.58_PM_1790007565455.jpeg';
+import logoPath from '@/assets/mercury-logo-sharp.png';
 import { Link, Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
@@ -33,7 +33,7 @@ const catalogs = [
   { title: 'Procurement & Supply', category: 'SOURCE / 04', description: 'Materials and supply support structured around what your development requires.', image: 'https://images.pexels.com/photos/4481327/pexels-photo-4481327.jpeg?auto=compress&cs=tinysrgb&w=1200', icon: PackageCheck },
 ];
 
-const navItems = [['About', '/about'], ['Services', '/services'], ['Catalogs', '/catalogs'], ['Industries', '/industries'], ['Contact', '/contact']];
+const navItems = [['Home', '/'], ['About', '/about'], ['Services', '/services'], ['Catalogs', '/catalogs'], ['Industries', '/industries'], ['Contact', '/contact']];
 const description = 'Mercury Décor Limited provides professional interior and exterior finishing, construction, procurement, supply, logistics and general contracting services in Port Harcourt, Rivers State, Nigeria.';
 
 function AppLink({ href, children, className = '', onClick, ...rest }: { href: string; children: ReactNode; className?: string; onClick?: () => void } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children' | 'href' | 'className' | 'onClick'>) {
@@ -42,12 +42,12 @@ function AppLink({ href, children, className = '', onClick, ...rest }: { href: s
 
 function Logo({ dark = false }: { dark?: boolean }) {
   return <AppLink href="/" className="group inline-flex items-center" data-testid="link-logo">
-    <span className={`relative flex h-14 w-28 shrink-0 items-center justify-center overflow-hidden rounded-[3px] border bg-white p-1 shadow-sm sm:w-32 ${dark ? 'border-white/25' : 'border-[#d6a62a]/30'}`}>
+    <span className={`relative flex h-[72px] w-[124px] shrink-0 items-center justify-center overflow-hidden rounded-[3px] border bg-white px-1 shadow-sm sm:w-[142px] ${dark ? 'border-white/25' : 'border-[#d6a62a]/30'}`}>
       <img
         src={logoPath}
         alt="Mercury Décor Limited logo"
-        width="1280"
-        height="640"
+        width="2016"
+        height="1172"
         className="h-full w-full object-contain"
       />
     </span>
@@ -94,7 +94,7 @@ function QuoteButton({ service, onClick }: { service?: string; onClick?: () => v
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   return <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#082b54]/95 text-white backdrop-blur-md">
-    <div className="container-wide flex h-[76px] items-center justify-between"><Logo dark />
+    <div className="container-wide flex h-[92px] items-center justify-between"><Logo dark />
       <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">{navItems.map(([label, href]) => <AppLink key={href} href={href} data-testid={`link-nav-${label.toLowerCase()}`} className="text-[12px] font-semibold tracking-[.08em] text-white/70 transition-colors hover:text-[#d6a62a]">{label}</AppLink>)}</nav>
       <div className="hidden items-center gap-3 lg:flex"><WhatsAppButton compact label="WhatsApp" /><QuoteButton /></div>
       <button type="button" className="rounded-full p-2 text-white lg:hidden" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen((open) => !open)} data-testid="button-mobile-menu">{mobileOpen ? <X size={25} /> : <Menu size={25} />}</button>
@@ -109,7 +109,7 @@ function Footer() {
 
 function Shell({ children, title, path }: { children: ReactNode; title: string; path: string }) {
   usePageMeta(title, path); useReveal();
-  return <div className="noise min-h-[100dvh] overflow-x-hidden bg-[#f5f7fa] text-[#111827]"><Header /><main className="pt-[76px]">{children}</main><Footer /></div>;
+  return <div className="noise min-h-[100dvh] overflow-x-hidden bg-[#f5f7fa] text-[#111827]"><Header /><main className="pt-[92px]">{children}</main><Footer /></div>;
 }
 
 function PageHero({ eyebrow, title, italic, text }: { eyebrow: string; title: string; italic?: string; text?: string }) {
