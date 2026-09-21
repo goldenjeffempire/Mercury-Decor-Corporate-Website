@@ -246,13 +246,14 @@ function ShowroomPreview() {
           onContextMenu={(event) => event.preventDefault()}
         >
           <img key={active.src} src={active.src} alt={active.alt} draggable={false} decoding="async" onError={(event) => { event.currentTarget.style.display = 'none'; }} className="showroom-image pointer-events-none absolute inset-0 h-full w-full object-cover" />
+          <ImageWatermark large />
           <figcaption className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between bg-gradient-to-t from-[#061f3d]/90 via-[#061f3d]/35 to-transparent px-5 pb-5 pt-20 sm:px-7 sm:pb-7">
             <span className="eyebrow text-[#d6a62a]">Featured project view</span>
             <span className="font-mono text-xs text-white/65">{String(activeIndex + 1).padStart(2, '0')} / {showroomImages.length}</span>
           </figcaption>
         </figure>
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
-          {nextImages.map((image, position) => <button key={image.src} type="button" onClick={() => goTo(image.index)} aria-label={`Show image ${image.index + 1}`} className="reveal group relative min-h-[180px] overflow-hidden bg-[#0b3769] text-left sm:min-h-[240px]"><img src={image.src} alt={image.alt} loading="lazy" decoding="async" onError={(event) => { event.currentTarget.style.display = 'none'; }} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" /><span className="absolute inset-0 bg-gradient-to-t from-[#061f3d]/75 via-transparent to-transparent" /><span className="absolute bottom-4 left-4 z-20 text-xs font-bold uppercase tracking-[.12em] text-white/85">{position === 0 ? 'Up next' : 'Following'}</span></button>)}
+          {nextImages.map((image, position) => <button key={image.src} type="button" onClick={() => goTo(image.index)} aria-label={`Show image ${image.index + 1}`} className="reveal group relative min-h-[180px] overflow-hidden bg-[#0b3769] text-left sm:min-h-[240px]"><img src={image.src} alt={image.alt} loading="lazy" decoding="async" onError={(event) => { event.currentTarget.style.display = 'none'; }} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" /><ImageWatermark /><span className="absolute inset-0 bg-gradient-to-t from-[#061f3d]/75 via-transparent to-transparent" /><span className="absolute bottom-4 left-4 z-20 text-xs font-bold uppercase tracking-[.12em] text-white/85">{position === 0 ? 'Up next' : 'Following'}</span></button>)}
         </div>
       </div>
       <div className="mt-5 h-1 overflow-hidden bg-white/10"><div key={activeIndex} className={`showroom-progress h-full bg-[#d6a62a] ${paused ? 'paused' : ''}`} /></div>
@@ -306,6 +307,7 @@ function LoopingProjectVideo({ video, index }: { video: (typeof projectVideos)[n
         Your browser does not support embedded video.
       </video>
       {failed && <div className="absolute inset-0"><img src={video.poster} alt={`${video.title} video preview`} className="h-full w-full object-cover" /></div>}
+      <ImageWatermark top />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#061f3d]/92 via-[#061f3d]/25 to-transparent px-4 pb-4 pt-20">
         <span className="text-[10px] font-bold uppercase tracking-[.14em] text-[#d6a62a]">Looping project view · {String(index + 1).padStart(2, '0')}</span>
       </div>
