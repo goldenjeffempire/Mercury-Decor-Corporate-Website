@@ -1,1 +1,2 @@
 - [Project video compatibility](project-video-compatibility.md) — Keep WebM before MP4 for every project video; some Chromium builds cannot decode otherwise valid H.264 uploads.
+- [Render pnpm compatibility](render-pnpm-compatibility.md) — Keep Corepack pinned to pnpm 10 while the workspace uses onlyBuiltDependencies; pnpm 12 ignores that policy.
