@@ -412,9 +412,6 @@ function LoopingProjectVideo({ video, index }: { video: (typeof projectVideos)[n
       </video>
       {failed && <div className="absolute inset-0"><img src={video.poster} alt={`${video.title} video preview`} className="h-full w-full object-cover" /></div>}
       <ImageWatermark top />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#061f3d]/92 via-[#061f3d]/25 to-transparent px-4 pb-4 pt-20">
-        <span className="text-[10px] font-bold uppercase tracking-[.14em] text-[#d6a62a]">Looping project view · {String(index + 1).padStart(2, '0')}</span>
-      </div>
     </div>
     <div className="p-5">
       <h3 className="font-display text-lg font-bold text-[#082b54]">{video.title}</h3>
