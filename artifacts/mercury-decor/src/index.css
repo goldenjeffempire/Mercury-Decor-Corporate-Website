@@ -113,6 +113,9 @@ img, video { background-color: transparent; }
 main img:not([aria-hidden='true']) {
   filter: brightness(1.18) contrast(1.02) saturate(1.04);
 }
+main img, main video {
+  image-rendering: auto;
+}
 main > section:not(:first-child) {
   content-visibility: auto;
   contain-intrinsic-size: auto 850px;
@@ -149,7 +152,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .reveal-delay-3 { transition-delay: .24s; }
 .hero-art { animation: heroDrift 18s ease-in-out infinite alternate; }
 @keyframes heroDrift { from { transform: scale(1.03) translate3d(0,0,0); } to { transform: scale(1.1) translate3d(-1.2%, -1%, 0); } }
-@keyframes showroomFade { from { opacity: .35; transform: scale(1.025); } to { opacity: 1; transform: scale(1); } }
+@keyframes showroomFade { from { opacity: .35; } to { opacity: 1; } }
 @keyframes showroomProgress { from { width: 0; } to { width: 100%; } }
 .showroom-image { animation: showroomFade .7s ease both; }
 .showroom-progress { animation: showroomProgress 5s linear both; }

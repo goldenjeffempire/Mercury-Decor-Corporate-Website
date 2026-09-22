@@ -406,7 +406,7 @@ function LoopingProjectVideo({ video, index }: { video: (typeof projectVideos)[n
       onKeyUp={(event) => { if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); resumeVideo(); } }}
       onContextMenu={(event) => event.preventDefault()}
     >
-      <video ref={videoRef} autoPlay muted loop playsInline preload="none" poster={video.poster} onCanPlay={resumeVideo} onError={() => setFailed(true)} className="pointer-events-none h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]">
+      <video ref={videoRef} autoPlay muted loop playsInline preload="none" poster={video.poster} onCanPlay={resumeVideo} onError={() => setFailed(true)} className="pointer-events-none h-full w-full object-contain">
         {shouldLoad && <><source src={video.webm} type="video/webm" /><source src={video.src} type="video/mp4" /></>}
         Your browser does not support embedded video.
       </video>
@@ -446,7 +446,7 @@ function ConfidenceVideo({ video, label }: { video: (typeof projectVideos)[numbe
   }, [shouldLoad]);
 
   return <div ref={mediaRef} className="relative h-full min-h-[260px] overflow-hidden bg-[#061f3d]">
-    <video ref={videoRef} autoPlay muted loop playsInline preload="none" poster={video.poster} onCanPlay={() => videoRef.current?.play().catch(() => undefined)} onError={() => setFailed(true)} aria-label={video.title} className="h-full w-full object-cover">
+    <video ref={videoRef} autoPlay muted loop playsInline preload="none" poster={video.poster} onCanPlay={() => videoRef.current?.play().catch(() => undefined)} onError={() => setFailed(true)} aria-label={video.title} className="h-full w-full object-contain">
       {shouldLoad && <><source src={video.webm} type="video/webm" /><source src={video.src} type="video/mp4" /></>}
       Your browser does not support embedded video.
     </video>
