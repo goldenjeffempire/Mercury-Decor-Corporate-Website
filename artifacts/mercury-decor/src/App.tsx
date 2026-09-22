@@ -19,8 +19,8 @@ const whatsappNumber = '2347076703296';
 const whatsappMessage = 'Hello Mercury Décor Limited, I would like to make an enquiry about your services.';
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 const galleryImages = [
-  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-01.jpg`, alt: 'EZE OHA APARA, RUMIGBO PALACE', portrait: false },
-  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-02.jpg`, alt: 'EZE OHA APARA, RUMIGBO PALACE', portrait: false },
+  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-01.jpg`, alt: 'Rivers State Government Projects, Port Harcourt: EZE OHA APARA, RUMIGBO PALACE', portrait: false },
+  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-02.jpg`, alt: 'Rivers State Government Projects, Port Harcourt: EZE OHA APARA, RUMIGBO PALACE', portrait: false },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-03.jpg`, alt: 'Residential interior finishing and ceiling details', portrait: false },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-04.jpg`, alt: 'White residential building exterior with fountain', portrait: false },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-05.jpg`, alt: 'Residential interior finishing with recessed ceiling lighting', portrait: false },
@@ -32,7 +32,7 @@ const galleryImages = [
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-11.jpg`, alt: 'Completed reception area interior', portrait: true },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-12.jpg`, alt: 'Completed treatment room interior', portrait: true },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-13.jpg`, alt: 'Finished medical room interior', portrait: true },
-  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-14.jpg`, alt: 'Neuropsychiatric Hospital, Rumuigbo, in Port Harcourt', portrait: false },
+  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-14.jpg`, alt: 'Rivers State Government Projects, Port Harcourt: Neuropsychiatric Hospital, Rumuigbo, in Port Harcourt', portrait: false },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-15.jpg`, alt: 'Completed institutional building exterior', portrait: false },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-16.jpg`, alt: 'Completed building exterior and covered entrance', portrait: true },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-17.jpg`, alt: 'Completed residential carport with a decorative black steel canopy', portrait: false },
