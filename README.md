@@ -236,7 +236,7 @@ The reusable video components lazy-load sources with `IntersectionObserver`, aut
 Contact details are currently defined in the React content and contact components:
 
 - Phone: `+234 808 227 7274`
-- WhatsApp: `+234 808 227 7274`
+- WhatsApp: `+234 707 670 3296` (`07076703296`)
 - Email: `silnice873@gmail.com`
 - Address: `131 Circular Road, Elekahia Housing Estate, Port Harcourt, Rivers State, Nigeria`
 
@@ -292,7 +292,7 @@ Nigeria
 
 - Phone: [+234 808 227 7274](tel:+2348082277274)
 - Email: [silnice873@gmail.com](mailto:silnice873@gmail.com)
-- WhatsApp: [Start an enquiry](https://wa.me/2348082277274)
+- WhatsApp: [Start an enquiry](https://wa.me/2347076703296)
 
 ## Verification checklist
 

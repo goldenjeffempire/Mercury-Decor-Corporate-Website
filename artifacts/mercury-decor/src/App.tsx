@@ -15,7 +15,7 @@ import seoPages from '@/seo-pages.json';
 import { Link, Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
-const whatsappNumber = '2348082277274';
+const whatsappNumber = '2347076703296';
 const whatsappMessage = 'Hello Mercury Décor Limited, I would like to make an enquiry about your services.';
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 const galleryImages = [

@@ -49,7 +49,7 @@ for (const [route, page] of Object.entries(pages)) {
         contactType: 'customer service',
         availableLanguage: 'English'
       },
-      sameAs: [`https://wa.me/2348082277274`]
+      sameAs: [`https://wa.me/2347076703296`]
     },
     {
       '@context': 'https://schema.org',
