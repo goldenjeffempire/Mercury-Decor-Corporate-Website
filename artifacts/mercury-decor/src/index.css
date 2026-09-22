@@ -110,10 +110,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 img, video { background-color: transparent; }
-main img:not([aria-hidden='true']) {
-  filter: brightness(1.18) contrast(1.02) saturate(1.04);
-}
 main img, main video {
+  filter: none;
   image-rendering: auto;
 }
 main > section:not(:first-child) {
