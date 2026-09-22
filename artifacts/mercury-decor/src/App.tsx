@@ -32,7 +32,7 @@ const galleryImages = [
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-11.jpg`, alt: 'Completed reception area interior', portrait: true },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-12.jpg`, alt: 'Completed treatment room interior', portrait: true },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-13.jpg`, alt: 'Finished medical room interior', portrait: true },
-  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-14.jpg`, alt: 'Completed institutional building exterior and driveway', portrait: false },
+  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-14.jpg`, alt: 'Neuropsychiatric Hospital, Rumuigbo, in Port Harcourt', portrait: false },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-15.jpg`, alt: 'Completed institutional building exterior', portrait: false },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-16.jpg`, alt: 'Completed building exterior and covered entrance', portrait: true },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-17.jpg`, alt: 'Completed residential carport with a decorative black steel canopy', portrait: false },
