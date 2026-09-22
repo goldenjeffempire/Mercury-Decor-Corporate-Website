@@ -19,10 +19,10 @@ const whatsappNumber = '2347076703296';
 const whatsappMessage = 'Hello Mercury Décor Limited, I would like to make an enquiry about your services.';
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 const galleryImages = [
-  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-01.jpg`, alt: 'Rivers State Government Projects, Port Harcourt: EZE OHA APARA, RUMIGBO PALACE', portrait: false },
-  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-02.jpg`, alt: 'Rivers State Government Projects, Port Harcourt: EZE OHA APARA, RUMIGBO PALACE', portrait: false },
+  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-01.jpg`, alt: 'Interior of the Rivers State Government Projects, Port Harcourt: EZE OHA APARA, RUMIGBO PALACE', portrait: false },
+  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-02.jpg`, alt: 'Finished residential interior with decorative feature table', portrait: false },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-03.jpg`, alt: 'Residential interior finishing and ceiling details', portrait: false },
-  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-04.jpg`, alt: 'White residential building exterior with fountain', portrait: false },
+  { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-04.jpg`, alt: 'Exterior of the Rivers State Government Projects, Port Harcourt: EZE OHA APARA, RUMIGBO PALACE', portrait: false },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-05.jpg`, alt: 'Residential interior finishing with recessed ceiling lighting', portrait: false },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-06.jpg`, alt: 'Completed white building exterior with dark roofing', portrait: false },
   { src: `${import.meta.env.BASE_URL}project-gallery-watermarked/project-07.jpg`, alt: 'Finished clinical ward interior', portrait: true },
