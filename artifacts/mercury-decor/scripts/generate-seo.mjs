@@ -1,4 +1,4 @@
-import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -6,11 +6,11 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist/public');
 const basePages = JSON.parse(await readFile(path.join(root, 'src/seo-pages.json'), 'utf8'));
 const content = JSON.parse(await readFile(path.join(root, 'src/seo-content.json'), 'utf8'));
-const configuredUrl = process.env.VITE_SITE_URL?.replace(/\/+$/, '');
-if (configuredUrl && (!/^https:\/\/[^/?#]+$/i.test(configuredUrl) || /replit\.dev|localhost|127\.0\.0\.1/i.test(configuredUrl))) {
-  throw new Error('VITE_SITE_URL must be the verified HTTPS production origin, without a path.');
+const siteConfig = JSON.parse(await readFile(path.join(root, 'src/site-config.json'), 'utf8'));
+const origin = siteConfig.origin;
+if (!/^https:\/\/[^/?#]+$/i.test(origin) || /replit\.dev|localhost|127\.0\.0\.1/i.test(origin)) {
+  throw new Error('Site origin must be the preferred HTTPS production origin, without a path or trailing slash.');
 }
-const origin = configuredUrl || '';
 const verification = process.env.GOOGLE_SITE_VERIFICATION;
 if (verification && !/^[A-Za-z0-9_-]+$/.test(verification)) throw new Error('Invalid Google Search Console verification value.');
 const template = await readFile(path.join(dist, 'index.html'), 'utf8');
@@ -67,7 +67,7 @@ const breadcrumb = (route, page) => {
 for (const [route, page] of pages) {
   const crumbs = breadcrumb(route, page);
   const pageUrl = absolute(route);
-  const graph = origin ? [
+  const graph = [
     {
       '@type': ['Organization', 'HomeAndConstructionBusiness'],
       '@id': businessId, name: 'Mercury Décor Limited', alternateName: 'Mercury Decor Limited',
@@ -92,18 +92,18 @@ for (const [route, page] of pages) {
         '@type': 'ListItem', position: index + 1, name, item: absolute(crumbRoute)
       }))
     }
-  ] : [];
-  if (origin && page.kind === 'service') graph.push({
+  ];
+  if (page.kind === 'service') graph.push({
     '@type': 'Service', '@id': `${pageUrl}#service`, name: page.entry.title,
     description: page.description, url: pageUrl, provider: { '@id': businessId },
     areaServed: { '@type': 'AdministrativeArea', name: 'Rivers State, Nigeria' }
   });
-  if (origin && page.kind === 'project') graph.push({
+  if (page.kind === 'project') graph.push({
     '@type': 'ImageObject', '@id': `${pageUrl}#image`, name: page.entry.title,
     description: page.entry.summary, contentUrl: absolute(page.image),
     creator: { '@id': businessId }
   });
-  if (origin && route === '/catalogs') {
+  if (route === '/catalogs') {
     const videoFiles = ['03', '02', '04', '05', '06', '01', '07', '08', '09', '10', '11', '12', '13', '14', '15'];
     content.videos.forEach((name, index) => graph.push({
       '@type': 'VideoObject', '@id': `${pageUrl}#video-${index + 1}`, name,
@@ -116,17 +116,13 @@ for (const [route, page] of pages) {
 
   let html = template.replace(/<title>.*?<\/title>/i, `<title>${escapeHtml(page.title)}</title>`);
   html = headMeta(html, 'name', 'description', page.description);
-  html = headMeta(html, 'name', 'robots', origin
-    ? 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
-    : 'noindex, follow');
+  html = headMeta(html, 'name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
   for (const [attribute, key, value] of [
     ['property', 'og:title', page.title], ['property', 'og:description', page.description],
     ['property', 'og:url', pageUrl], ['property', 'og:image', absolute(page.image || '/og-image.jpg')],
     ['name', 'twitter:title', page.title], ['name', 'twitter:description', page.description],
     ['name', 'twitter:image', absolute(page.image || '/og-image.jpg')]
-  ]) {
-    if (origin || !['og:url', 'og:image', 'twitter:image'].includes(key)) html = headMeta(html, attribute, key, value);
-  }
+  ]) html = headMeta(html, attribute, key, value);
   // The shared preview image is 1200×630; project images have their own proportions.
   if (page.image) {
     html = html.replace(/<meta property="og:image:(width|height)"[^>]*>\s*/gi, '');
@@ -149,20 +145,17 @@ for (const [route, page] of pages) {
   const staticContent = `<header><nav aria-label="Breadcrumb">${crumbs.map((item) => link(item.route, item.name)).join(' / ')}</nav></header><main><h1>${escapeHtml(page.heading)}</h1><p>${escapeHtml(page.description)}</p><p>${escapeHtml(page.body)}</p>${imageMarkup}<nav aria-label="Related pages">${contentLinks.join(' · ')}</nav></main><footer><p>Mercury Décor Limited · 131 Circular Road, Elekahia Housing Estate, Port Harcourt, Rivers State, Nigeria · +234 808 227 7274 · silnice873@gmail.com</p></footer>`;
   html = html.replace('<div id="root"></div>', `<div id="root">${staticContent}</div>`);
   if (verification) html = html.replace('</head>', `  <meta name="google-site-verification" content="${verification}">\n</head>`);
-  if (origin) html = html.replace('</head>', `  <link rel="canonical" href="${escapeHtml(pageUrl)}">\n  <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replaceAll('<', '\\u003c')}</script>\n</head>`);
+  html = html.replace('</head>', `  <link rel="canonical" href="${escapeHtml(pageUrl)}">\n  <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replaceAll('<', '\\u003c')}</script>\n</head>`);
   const target = route === '/' ? path.join(dist, 'index.html') : path.join(dist, route.slice(1), 'index.html');
   await mkdir(path.dirname(target), { recursive: true });
   await writeFile(target, html);
 }
 
-// A sitemap and canonical URLs must never contain a development address or fabricated domain.
-if (origin) {
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...pages].map(([route]) => `  <url><loc>${escapeHtml(absolute(route))}</loc></url>`).join('\n')}\n</urlset>\n`;
-  await writeFile(path.join(dist, 'sitemap.xml'), xml);
-} else await rm(path.join(dist, 'sitemap.xml'), { force: true });
-await writeFile(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n${origin ? `\nSitemap: ${origin}/sitemap.xml\n` : ''}`);
+const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...pages].map(([route]) => `  <url><loc>${escapeHtml(absolute(route))}</loc></url>`).join('\n')}\n</urlset>\n`;
+await writeFile(path.join(dist, 'sitemap.xml'), xml);
+await writeFile(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${origin}/sitemap.xml\n`);
 let notFound = template.replace(/<title>.*?<\/title>/i, '<title>Page Not Found | Mercury Décor Limited</title>');
 notFound = headMeta(notFound, 'name', 'robots', 'noindex, follow');
 notFound = notFound.replace('<div id="root"></div>', `<div id="root"><main><h1>Page not found</h1><p>This page is unavailable. ${link('/', 'Return to Mercury Décor Limited')}</p></main></div>`);
 await writeFile(path.join(dist, '404.html'), notFound);
-console.log(`Generated ${pages.size} crawlable HTML routes${origin ? ` and a sitemap for ${origin}` : ' (production origin needed for canonicals and sitemap)'}.`);
+console.log(`Generated ${pages.size} crawlable HTML routes and a sitemap for ${origin}.`);

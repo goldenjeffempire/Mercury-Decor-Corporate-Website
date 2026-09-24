@@ -13,6 +13,7 @@ import NotFound from '@/pages/not-found';
 import logoPath from '@/assets/mercury-logo-sharp.png';
 import seoPages from '@/seo-pages.json';
 import seoContent from '@/seo-content.json';
+import siteConfig from '@/site-config.json';
 import { Link, Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
@@ -233,8 +234,7 @@ function useReveal() {
 function usePageMeta(_title: string, path: string) {
   useEffect(() => {
     const page = pageMeta(path);
-    const configuredOrigin = import.meta.env.VITE_SITE_URL?.replace(/\/$/, '');
-    const origin = configuredOrigin || window.location.origin;
+    const origin = siteConfig.origin;
     const canonicalUrl = `${origin}${path === '/' ? '/' : path}`;
     const project = seoContent.projects.find((entry) => path === `/catalogs/project/${entry.slug}`);
     const category = seoContent.categories.find((entry) => path === `/catalogs/${entry.slug}`);
@@ -257,7 +257,8 @@ function usePageMeta(_title: string, path: string) {
       tag.content = content;
     };
     setMeta('meta[name="description"]', 'name', 'description', page.description);
-    setMeta('meta[name="robots"]', 'name', 'robots', configuredOrigin
+    const isPreferredHost = window.location.hostname === new URL(origin).hostname;
+    setMeta('meta[name="robots"]', 'name', 'robots', isPreferredHost
       ? 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
       : 'noindex, follow');
     setMeta('meta[property="og:title"]', 'property', 'og:title', page.title);
@@ -279,8 +280,7 @@ function usePageMeta(_title: string, path: string) {
       canonical.rel = 'canonical';
       document.head.appendChild(canonical);
     }
-    if (configuredOrigin) canonical.href = canonicalUrl;
-    else canonical.remove();
+    canonical.href = canonicalUrl;
   }, [path]);
 }
 
