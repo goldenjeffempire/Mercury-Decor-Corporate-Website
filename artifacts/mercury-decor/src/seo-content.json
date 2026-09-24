@@ -1,0 +1,137 @@
+{
+  "services": [
+    {
+      "slug": "interior-exterior-finishing",
+      "title": "Interior & Exterior Finishing",
+      "metaTitle": "Interior & Exterior Finishing Port Harcourt | Mercury Décor",
+      "summary": "Explore painting, wall screeding, tiling, marble-effect finishes, decorative wall panels and stamped flooring for residential and commercial spaces in Port Harcourt.",
+      "intro": "The finish is what people see and touch every day. Mercury Décor Limited works with clients to define suitable surface treatments for the room, the building and the way it will be used.",
+      "details": "Our finishing scope includes painting, wall screeding, tiling, marble-effect and graze finishes, 3D wall panels and stamped flooring. Discuss the condition of the surface, the intended look and the practical requirements before requesting a quotation.",
+      "imageIndex": 0,
+      "category": "interior-exterior-finishing"
+    },
+    {
+      "slug": "pop-ceilings-total-finishing",
+      "title": "POP Ceilings & Total Finishing",
+      "metaTitle": "POP Ceilings & Finishing Port Harcourt | Mercury Décor",
+      "summary": "Explore POP, plasterboard and skim ceilings, decorative forms and lighting-ready ceiling finishes from Mercury Décor Limited in Port Harcourt.",
+      "intro": "Ceilings influence the proportion and light of an interior. A useful brief starts with room dimensions, desired forms and the lighting layout, not only a reference photo.",
+      "details": "Mercury Décor's total finishing work covers POP ceilings, plasterboard ceilings, skim ceilings and decorative ceiling designs. Browse real ceiling examples in the catalog to compare layered profiles, recessed details and integrated lighting.",
+      "imageIndex": 68,
+      "category": "total-finishing"
+    },
+    {
+      "slug": "building-installation",
+      "title": "Building & Installation",
+      "metaTitle": "Building & Roofing Installation Port Harcourt | Mercury Décor",
+      "summary": "Discuss roofing, window hoods, handrails, plumbing and building installation requirements with Mercury Décor Limited in Port Harcourt, Rivers State.",
+      "intro": "Building elements should be considered alongside the finishing plan so the completed space works as well as it looks.",
+      "details": "Our building and installation services include roofing, window hoods, handrails and plumbing support. Share drawings, measurements and site conditions when requesting a project-specific discussion.",
+      "imageIndex": 5,
+      "category": "building-installation"
+    },
+    {
+      "slug": "building-materials-procurement",
+      "title": "Building Materials Procurement & Supply",
+      "metaTitle": "Building Materials Procurement Port Harcourt | Mercury Décor",
+      "summary": "Source building and construction materials, chippings and general supplies for projects in Port Harcourt and across Nigeria with Mercury Décor Limited.",
+      "intro": "Materials procurement works best when quantities, specifications and delivery needs are established early.",
+      "details": "Mercury Décor supports building materials and construction materials sourcing, general procurement and chippings supply. Describe your project location and material requirements so the enquiry can be assessed accurately.",
+      "imageIndex": 14,
+      "category": "building-installation"
+    },
+    {
+      "slug": "logistics-project-support",
+      "title": "Logistics & Project Support",
+      "metaTitle": "Construction Logistics & Support Nigeria | Mercury Décor",
+      "summary": "Explore logistics, warehousing, inventory management and cargo inspection support for Nigerian building projects with Mercury Décor Limited.",
+      "intro": "Moving and managing materials is part of delivering a coordinated construction or finishing project.",
+      "details": "Our support services include logistics, warehousing, inventory management and cargo inspection. Scope and availability depend on the project; share the materials, timing and destination when you enquire.",
+      "imageIndex": 15,
+      "category": "building-installation"
+    },
+    {
+      "slug": "general-contracting",
+      "title": "General Contracting",
+      "metaTitle": "General Contracting Port Harcourt | Mercury Décor",
+      "summary": "Discuss residential, commercial and corporate project requirements with Mercury Décor Limited, a Port Harcourt finishing and contracting company.",
+      "intro": "A project brief can combine several kinds of work. Mercury Décor provides a starting point for discussing the scope, sequence and practical support required.",
+      "details": "General contracting enquiries can cover residential, commercial and corporate projects. Describe the location, intended outcome and services needed to begin a focused discussion.",
+      "imageIndex": 13,
+      "category": "building-installation"
+    }
+  ],
+  "categories": [
+    {
+      "slug": "interior-exterior-finishing",
+      "title": "Interior & Exterior Finishing Projects",
+      "metaTitle": "Interior & Exterior Finishing Catalog | Mercury Décor",
+      "summary": "Explore wall, floor and exterior finishing references from Mercury Décor Limited, including completed interiors and building exteriors in Port Harcourt.",
+      "intro": "Compare completed interiors and exterior surfaces to understand how different treatments affect the character of a building.",
+      "details": "These visual references include interior rooms, painted surfaces and completed exteriors. A photograph helps communicate a desired direction, but the right finish also depends on surface preparation, material selection and site conditions.",
+      "service": "interior-exterior-finishing",
+      "imageIndex": 0
+    },
+    {
+      "slug": "total-finishing",
+      "title": "Ceiling & Total Finishing Projects",
+      "metaTitle": "POP Ceiling & Total Finishing Catalog | Mercury Décor",
+      "summary": "Browse decorative ceiling designs, recessed lighting, POP and plasterboard finishing references from Mercury Décor Limited.",
+      "intro": "Ceiling references show how lines, levels and light sources can shape the experience of a room.",
+      "details": "The collection includes recessed forms, linear lighting and layered profiles. Use the images to identify details you like, then discuss room size, lighting and installation requirements before choosing a design.",
+      "service": "pop-ceilings-total-finishing",
+      "imageIndex": 68
+    },
+    {
+      "slug": "building-installation",
+      "title": "Building & Installation Projects",
+      "metaTitle": "Building & Installation Catalog | Mercury Décor",
+      "summary": "See building exteriors, roofing-related details and architectural installation examples in Mercury Décor Limited's project catalog.",
+      "intro": "Exterior and installation references help connect practical building decisions with the appearance of the completed space.",
+      "details": "Browse completed building environments, entrances and architectural metalwork. Site conditions, dimensions and construction requirements should guide the final specification.",
+      "service": "building-installation",
+      "imageIndex": 5
+    },
+    {
+      "slug": "metalwork-paving",
+      "title": "Metalwork & Decorative Paving",
+      "metaTitle": "Metalwork & Paving Project Catalog | Mercury Décor",
+      "summary": "Explore handrails, decorative steelwork, balustrades and stamped concrete paving in Mercury Décor Limited's visual catalog.",
+      "intro": "The detail of a railing or paving pattern can bring continuity to an entrance, stairway or outdoor area.",
+      "details": "The images document metal balustrades, decorative canopy frames and patterned concrete surfaces. Compare motifs, materials and how the finished work sits within the wider property.",
+      "service": "building-installation",
+      "imageIndex": 29
+    }
+  ],
+  "videos": [
+    "Completed Interior Finishing Walkthrough",
+    "Interior Columns and Door Finishes",
+    "Exterior Compound Surface Finishes",
+    "Patterned Courtyard Floor View",
+    "Finished Doors and Wall Surfaces",
+    "POP Ceiling Forms and Transitions",
+    "Recessed Ceiling Borders and Lighting",
+    "Layered Ceiling and Warm Cove Lighting",
+    "Ceiling and Joinery Interior View",
+    "Decorative Ceiling Geometry",
+    "Room-by-Room Ceiling Lighting",
+    "Layered Forms and Recessed Lighting",
+    "Linear LED Ceiling Details",
+    "Modern Ceiling and Interior Finishes",
+    "Illuminated Ceiling Edges and Downlights"
+  ],
+  "projects": [
+    {"slug":"rumuigbo-palace-interior","title":"Rumuigbo Palace Interior Finishing","imageIndex":0,"category":"interior-exterior-finishing","summary":"Interior view identified as part of Rivers State Government projects at Eze Oha Apara, Rumuigbo Palace, Port Harcourt.","detail":"The photograph shows a furnished interior with a decorative ceiling, lighting and coordinated room finishes.","consideration":"Notice how the ceiling treatment, pendant lighting and wall colour work together around the furniture. When discussing a similar interior, consider which elements will remain in the room and whether the planned lighting suits its layout."},
+    {"slug":"rumuigbo-palace-exterior","title":"Rumuigbo Palace Exterior","imageIndex":3,"category":"building-installation","summary":"Exterior view identified as part of Rivers State Government projects at Eze Oha Apara, Rumuigbo Palace, Port Harcourt.","detail":"The image shows a finished building exterior, roofline and central entrance feature.","consideration":"The facade has a strong central axis, with the entrance framed against a broader roofline. For your own exterior, share the elevation and roof details so the proposed finish can be considered across the whole building rather than in isolation."},
+    {"slug":"residential-ceiling-lighting","title":"Residential Ceiling Lighting","imageIndex":4,"category":"total-finishing","summary":"A residential interior showing recessed ceiling lighting and finished room surfaces.","detail":"This reference shows how a recessed ceiling and lighting layout can contribute to the appearance of a completed room.","consideration":"Look at the distance between the ceiling edges, central fixture and recessed downlights. The placement that works in one room may not work in another; ceiling height and the location of furniture are useful details to discuss before selecting a layout."},
+    {"slug":"white-building-exterior","title":"White Building Exterior & Roofline","imageIndex":5,"category":"building-installation","summary":"A completed white building exterior with dark roofing and a defined entrance.","detail":"The contrast between the light facade and dark roof is the main visual feature in this exterior reference.","consideration":"Here the dark roof edge outlines the pale exterior and makes the entrance easier to read. If you are planning an exterior treatment, consider the relationship between roof colour, trim, windows and the finish already on the walls."},
+    {"slug":"decorative-steel-carport","title":"Decorative Steel Carport Canopy","imageIndex":16,"category":"metalwork-paving","summary":"A residential carport with a decorative black steel canopy.","detail":"The canopy frame provides a clear reference for the relationship between metalwork, driveway and property exterior.","consideration":"The visible frame and decorative elements give the carport its character without hiding the driveway beneath. For a similar brief, discuss available clearance, vehicle movement and the existing architecture before deciding on the frame proportions."},
+    {"slug":"ornamental-stair-railing","title":"Ornamental Stair Railing","imageIndex":22,"category":"metalwork-paving","summary":"A wrought-iron stair railing with a decorative scroll motif.","detail":"The image highlights the rail profile and scrollwork that shape the look of the stairway.","consideration":"The repeated scrolls form a pattern along the stair run while the handrail follows its slope. For your own stairway, accurate measurements, the landing arrangement and the required handrail height are more useful than a style reference alone."},
+    {"slug":"stamped-concrete-patio","title":"Stamped Concrete Patio Finish","imageIndex":30,"category":"metalwork-paving","summary":"A terracotta stamped-concrete patio with a patterned surface.","detail":"The reference focuses on the repeating paving texture and colour across the finished outdoor floor.","consideration":"The consistent pattern gives this outdoor surface a defined visual rhythm. If a patterned finish is being considered, discuss the size of the area, drainage conditions and how the colour will sit against adjoining walls or paving."},
+    {"slug":"gold-balcony-railing","title":"Stainless & Gold Balcony Railing","imageIndex":37,"category":"metalwork-paving","summary":"A decorative stainless and gold balcony railing overlooking a patterned floor.","detail":"This view offers a close look at metallic balusters, handrail detailing and their relationship to the surrounding finish.","consideration":"The mixed metallic tones and closely spaced details create a prominent edge to the balcony. Share the balcony measurements and preferred finish when enquiring; the exact dimensions and site conditions will affect what is appropriate."},
+    {"slug":"compass-pattern-paving","title":"Compass Pattern Decorative Paving","imageIndex":45,"category":"metalwork-paving","summary":"Stamped concrete paving with a multicolour compass pattern.","detail":"The central compass motif is the focal point of this decorative paving reference.","consideration":"A large central motif needs enough surrounding space to remain visible when vehicles or furniture are present. Think about where the main viewing angle will be and how the border pattern should meet the edges of your own outdoor area."},
+    {"slug":"recessed-ceiling-panel","title":"Recessed Ceiling Panel","imageIndex":66,"category":"total-finishing","summary":"A white recessed ceiling panel outlined by a black rectangular border.","detail":"The sharp border and simple geometry make this a useful reference for restrained ceiling detailing.","consideration":"The design relies on a clean contrast between a white plane and a narrow dark outline rather than multiple layers. Consider the room dimensions, whether the panel should align with the space below it and where any lighting will be placed."},
+    {"slug":"illuminated-hallway-ceiling","title":"Illuminated Hallway Ceiling","imageIndex":67,"category":"total-finishing","summary":"A contemporary hallway ceiling with warm cove lighting and linear LED strips.","detail":"This reference shows the visual effect of combining perimeter lighting with straight illuminated channels.","consideration":"The long ceiling lines draw the eye down the passage, while the cove introduces a warmer edge. For a corridor with different proportions, discuss the lighting positions, access for maintenance and the intended brightness before adapting the idea."},
+    {"slug":"layered-ceiling-design","title":"Layered Ceiling Design","imageIndex":70,"category":"total-finishing","summary":"A layered ceiling with black trims, warm lighting and a geometric centrepiece.","detail":"The photograph illustrates how layered forms and contrasting trim create a stronger ceiling focal point.","consideration":"Several levels of framing lead toward the central detail. This composition will read differently in a smaller room, so share the ceiling height, plan and the positions of existing electrical points when discussing an adapted design."}
+  ]
+}

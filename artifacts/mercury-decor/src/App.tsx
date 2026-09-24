@@ -12,6 +12,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
 import logoPath from '@/assets/mercury-logo-sharp.png';
 import seoPages from '@/seo-pages.json';
+import seoContent from '@/seo-content.json';
 import { Link, Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
 const queryClient = new QueryClient();
@@ -102,7 +103,7 @@ const galleryImages = [
   { src: `${import.meta.env.BASE_URL}futuristic-gallery/mercury-future-04.jpg`, alt: 'Futuristic hospitality lounge concept with layered textures and integrated lighting', portrait: false, concept: true },
   { src: `${import.meta.env.BASE_URL}futuristic-gallery/mercury-future-05.jpg`, alt: 'Futuristic staircase atrium concept with floating steps and luminous handrails', portrait: false, concept: true },
   { src: `${import.meta.env.BASE_URL}futuristic-gallery/mercury-future-06.jpg`, alt: 'Futuristic executive office concept with modular ceiling and navy-gold finishes', portrait: false, concept: true },
-];
+].map((image) => ({ ...image, src: image.src.replace(/\.jpg$/, '.webp') }));
 const showroomImages = galleryImages.map((image) => ({
   ...image,
   src: image.src
@@ -177,6 +178,14 @@ function matchesCatalogFilter(index: number, filter: CatalogFilterId) {
   return (index >= 22 && index <= 28) || (index >= 34 && index <= 43) || (index >= 46 && index <= 64);
 }
 
+const detailedPages = {
+  ...Object.fromEntries(seoContent.services.map((entry) => [`/services/${entry.slug}`, { title: entry.metaTitle, description: entry.summary, label: entry.title }])),
+  ...Object.fromEntries(seoContent.categories.map((entry) => [`/catalogs/${entry.slug}`, { title: entry.metaTitle, description: entry.summary, label: entry.title }])),
+  ...Object.fromEntries(seoContent.projects.map((entry) => [`/catalogs/project/${entry.slug}`, { title: `${entry.title} | Mercury Décor Limited`, description: `${entry.summary} Explore the project reference and related Mercury Décor services.`, label: entry.title }])),
+  '/port-harcourt': { title: 'Finishing Services in Port Harcourt | Mercury Décor', description: 'Visit Mercury Décor Limited in Elekahia, Port Harcourt. Explore finishing, POP ceilings, installation, building materials supply and project support.', label: 'Port Harcourt' },
+};
+const pageMeta = (path: string) => detailedPages[path as keyof typeof detailedPages] ?? seoPages[path as keyof typeof seoPages] ?? seoPages['/'];
+
 const navItems = [['Home', '/'], ['About', '/about'], ['Services', '/services'], ['Catalogs', '/catalogs'], ['Industries', '/industries'], ['Contact', '/contact']];
 const description = 'Mercury Décor Limited provides professional interior and exterior finishing, construction, procurement, supply, logistics and general contracting services in Port Harcourt, Rivers State, Nigeria.';
 
@@ -223,11 +232,19 @@ function useReveal() {
 
 function usePageMeta(_title: string, path: string) {
   useEffect(() => {
-    const page = seoPages[path as keyof typeof seoPages] ?? seoPages['/'];
+    const page = pageMeta(path);
     const configuredOrigin = import.meta.env.VITE_SITE_URL?.replace(/\/$/, '');
     const origin = configuredOrigin || window.location.origin;
     const canonicalUrl = `${origin}${path === '/' ? '/' : path}`;
-    const imageUrl = `${origin}/og-image.jpg`;
+    const project = seoContent.projects.find((entry) => path === `/catalogs/project/${entry.slug}`);
+    const category = seoContent.categories.find((entry) => path === `/catalogs/${entry.slug}`);
+    const service = seoContent.services.find((entry) => path === `/services/${entry.slug}`);
+    const imagePath = project
+      ? `${import.meta.env.BASE_URL}featured-projects/${project.slug}.webp`
+      : category || service
+        ? galleryImages[(category || service)!.imageIndex].src
+        : `${import.meta.env.BASE_URL}og-image.jpg`;
+    const imageUrl = new URL(imagePath, `${origin}/`).href;
     document.title = page.title;
 
     const setMeta = (selector: string, attribute: 'name' | 'property', key: string, content: string) => {
@@ -240,14 +257,21 @@ function usePageMeta(_title: string, path: string) {
       tag.content = content;
     };
     setMeta('meta[name="description"]', 'name', 'description', page.description);
-    setMeta('meta[name="robots"]', 'name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+    setMeta('meta[name="robots"]', 'name', 'robots', configuredOrigin
+      ? 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+      : 'noindex, follow');
     setMeta('meta[property="og:title"]', 'property', 'og:title', page.title);
     setMeta('meta[property="og:description"]', 'property', 'og:description', page.description);
     setMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
     setMeta('meta[property="og:image"]', 'property', 'og:image', imageUrl);
+    setMeta('meta[property="og:image:alt"]', 'property', 'og:image:alt', project?.title || category?.title || service?.title || 'Mercury Décor Limited project exterior');
     setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', page.title);
     setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', page.description);
     setMeta('meta[name="twitter:image"]', 'name', 'twitter:image', imageUrl);
+    if (project || category || service) {
+      document.head.querySelector('meta[property="og:image:width"]')?.remove();
+      document.head.querySelector('meta[property="og:image:height"]')?.remove();
+    }
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {
@@ -255,7 +279,8 @@ function usePageMeta(_title: string, path: string) {
       canonical.rel = 'canonical';
       document.head.appendChild(canonical);
     }
-    canonical.href = canonicalUrl;
+    if (configuredOrigin) canonical.href = canonicalUrl;
+    else canonical.remove();
   }, [path]);
 }
 
@@ -277,12 +302,14 @@ function Header() {
 }
 
 function Footer() {
-  return <><footer className="bg-[#061f3d] py-14 text-white"><div className="container-wide"><div className="grid gap-12 border-b border-white/12 pb-12 md:grid-cols-[1.2fr_.6fr_.8fr] md:items-end"><div><Logo dark /><p className="mt-6 max-w-[430px] text-sm leading-7 text-white/55">Professional interior and exterior finishing, construction, procurement, supply and project support for spaces built to make a lasting impression.</p><div className="mt-7 flex flex-wrap gap-2">{['Finishing', 'Construction', 'Procurement', 'Project support'].map((item) => <span key={item} className="rounded-full border border-white/12 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.1em] text-white/52">{item}</span>)}</div></div><nav aria-label="Footer navigation" className="grid grid-cols-2 gap-x-5 gap-y-3 text-sm text-white/62 md:grid-cols-1">{navItems.map(([label, href]) => <AppLink key={href} href={href} data-testid={`link-footer-${label.toLowerCase()}`} className="transition-colors hover:translate-x-1 hover:text-[#d6a62a]">{label}</AppLink>)}</nav><div><div className="eyebrow text-[#d6a62a]">Contact</div><div className="mt-5 space-y-3 text-sm leading-6 text-white/62"><address className="not-italic">131 Circular Road,<br />Elekahia Housing Estate,<br />Port Harcourt, Rivers State, Nigeria</address><a href="mailto:silnice873@gmail.com" className="block transition-colors hover:text-white" data-testid="link-footer-email">silnice873@gmail.com</a><a href="tel:+2348082277274" className="block transition-colors hover:text-white" data-testid="link-footer-phone">+234 808 227 7274</a><WhatsAppButton compact label="WhatsApp" /></div></div></div><div className="flex flex-col gap-3 pt-7 text-xs text-white/38 sm:flex-row sm:items-center sm:justify-between"><span>© 2026 Mercury Décor Limited. All Rights Reserved.</span><span>Building Beautiful Spaces.</span></div></div></footer><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-testid="link-floating-whatsapp" aria-label="Chat with Mercury Décor on WhatsApp" title="Chat on WhatsApp" className="fixed bottom-5 right-4 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_rgba(8,43,84,.28)] transition-all hover:-translate-y-1 hover:bg-[#1fba59] focus-visible:outline-white sm:bottom-7 sm:right-7 sm:h-16 sm:w-16"><SiWhatsapp size={29} aria-hidden="true" /><span className="sr-only">Chat on WhatsApp</span></a></>;
+  return <><footer className="bg-[#061f3d] py-14 text-white"><div className="container-wide"><div className="grid gap-12 border-b border-white/12 pb-12 md:grid-cols-[1.2fr_.6fr_.8fr] md:items-end"><div><Logo dark /><p className="mt-6 max-w-[430px] text-sm leading-7 text-white/55">Professional interior and exterior finishing, construction, procurement, supply and project support for spaces built to make a lasting impression.</p><div className="mt-7 flex flex-wrap gap-2">{['Finishing', 'Construction', 'Procurement', 'Project support'].map((item) => <span key={item} className="rounded-full border border-white/12 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.1em] text-white/52">{item}</span>)}</div></div><nav aria-label="Footer navigation" className="grid grid-cols-2 gap-x-5 gap-y-3 text-sm text-white/62 md:grid-cols-1">{navItems.map(([label, href]) => <AppLink key={href} href={href} data-testid={`link-footer-${label.toLowerCase()}`} className="transition-colors hover:translate-x-1 hover:text-[#d6a62a]">{label}</AppLink>)}<AppLink href="/port-harcourt" className="transition-colors hover:text-[#d6a62a]">Port Harcourt location</AppLink></nav><div><div className="eyebrow text-[#d6a62a]">Mercury Décor Limited · Contact</div><div className="mt-5 space-y-3 text-sm leading-6 text-white/62"><address className="not-italic">131 Circular Road,<br />Elekahia Housing Estate,<br />Port Harcourt, Rivers State, Nigeria</address><a href="mailto:silnice873@gmail.com" className="block transition-colors hover:text-white" data-testid="link-footer-email">silnice873@gmail.com</a><a href="tel:+2348082277274" className="block transition-colors hover:text-white" data-testid="link-footer-phone">+234 808 227 7274</a><WhatsAppButton compact label="WhatsApp" /></div></div></div><nav aria-label="Explore services and catalogs" className="flex flex-wrap gap-x-6 gap-y-3 border-b border-white/12 py-8 text-xs text-white/70">{seoContent.services.map((service) => <AppLink href={`/services/${service.slug}`} key={service.slug} className="hover:text-[#d6a62a]">{service.title}</AppLink>)}{seoContent.categories.map((category) => <AppLink href={`/catalogs/${category.slug}`} key={category.slug} className="hover:text-[#d6a62a]">{category.title}</AppLink>)}</nav><div className="flex flex-col gap-3 pt-7 text-xs text-white/38 sm:flex-row sm:items-center sm:justify-between"><span>© 2026 Mercury Décor Limited. All Rights Reserved.</span><span>Building Beautiful Spaces.</span></div></div></footer><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-testid="link-floating-whatsapp" aria-label="Chat with Mercury Décor on WhatsApp" title="Chat on WhatsApp" className="fixed bottom-5 right-4 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_rgba(8,43,84,.28)] transition-all hover:-translate-y-1 hover:bg-[#1fba59] focus-visible:outline-white sm:bottom-7 sm:right-7 sm:h-16 sm:w-16"><SiWhatsapp size={29} aria-hidden="true" /><span className="sr-only">Chat on WhatsApp</span></a></>;
 }
 
 function Shell({ children, title, path }: { children: ReactNode; title: string; path: string }) {
   usePageMeta(title, path); useReveal();
-  return <div className="noise min-h-[100dvh] overflow-x-hidden bg-[#f5f7fa] text-[#111827]"><Header /><main className="pt-[92px]">{children}</main><Footer /></div>;
+  const parent = path.startsWith('/catalogs/') ? '/catalogs' : path.startsWith('/services/') ? '/services' : null;
+  const label = (pageMeta(path) as { label?: string; eyebrow?: string }).label ?? (pageMeta(path) as { eyebrow?: string }).eyebrow ?? title;
+  return <div className="noise min-h-[100dvh] overflow-x-hidden bg-[#f5f7fa] text-[#111827]"><Header /><main className="pt-[92px]">{path !== '/' && <nav aria-label="Breadcrumb" className="bg-[#061f3d] px-5 py-3 text-xs text-white/80"><div className="container-wide flex flex-wrap gap-2"><AppLink href="/" className="hover:text-[#d6a62a]">Home</AppLink><span aria-hidden="true">/</span>{parent && <><AppLink href={parent} className="hover:text-[#d6a62a]">{parent === '/catalogs' ? 'Catalogs' : 'Services'}</AppLink><span aria-hidden="true">/</span></>}<span aria-current="page" className="text-[#d6a62a]">{label}</span></div></nav>}{children}</main><Footer /></div>;
 }
 
 function PageHero({ eyebrow, title, italic, text }: { eyebrow: string; title: string; italic?: string; text?: string }) {
@@ -406,7 +433,7 @@ function LoopingProjectVideo({ video, index }: { video: (typeof projectVideos)[n
       onKeyUp={(event) => { if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); resumeVideo(); } }}
       onContextMenu={(event) => event.preventDefault()}
     >
-      <video ref={videoRef} autoPlay muted loop playsInline preload="none" poster={video.poster} onCanPlay={resumeVideo} onError={() => setFailed(true)} className="pointer-events-none h-full w-full object-contain">
+      <video ref={videoRef} autoPlay muted loop playsInline preload="none" poster={video.poster} title={seoContent.videos[index]} onCanPlay={resumeVideo} onError={() => setFailed(true)} className="pointer-events-none h-full w-full object-contain">
         {shouldLoad && <><source src={video.webm} type="video/webm" /><source src={video.src} type="video/mp4" /></>}
         Your browser does not support embedded video.
       </video>
@@ -414,7 +441,7 @@ function LoopingProjectVideo({ video, index }: { video: (typeof projectVideos)[n
       <ImageWatermark top />
     </div>
     <div className="p-5">
-      <h3 className="font-display text-lg font-bold text-[#082b54]">{video.title}</h3>
+      <h3 className="font-display text-lg font-bold text-[#082b54]">{seoContent.videos[index]}</h3>
       <p className="mt-2 text-sm leading-6 text-[#5b6470]">{video.description}</p>
     </div>
   </article>;
@@ -519,8 +546,9 @@ function ServiceCard({ service, image, index }: { service: (typeof services)[num
       <div className="absolute bottom-4 left-4 z-20 flex items-center gap-3 text-white"><span className="flex h-10 w-10 items-center justify-center border border-[#d6a62a]/70 bg-[#082b54]/85 text-[#d6a62a] backdrop-blur-sm"><Icon size={19} strokeWidth={1.5} /></span><span className="font-mono text-xs text-white/70">{service.number}</span></div>
     </div>
     <div className="flex flex-1 flex-col p-6 md:p-7">
-      <h2 className="max-w-[350px] font-display text-2xl font-bold leading-tight tracking-[-.035em] text-[#082b54]">{service.title}</h2>
+      <h3 className="max-w-[350px] font-display text-2xl font-bold leading-tight tracking-[-.035em] text-[#082b54]">{service.title}</h3>
       <p className="mt-4 text-sm leading-6 text-[#5b6470]">{service.description}</p>
+      <AppLink href={`/services/${seoContent.services[index].slug}`} className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#a90000]">Explore {service.title} <ArrowRight size={15} /></AppLink>
       <div className="mt-6 grid gap-2 border-t border-[#082b54]/10 pt-5">{service.items.map((item) => <div key={item} className="flex items-center gap-2 text-xs font-semibold text-[#344154]"><Check size={13} className="shrink-0 text-[#a90000]" />{item}</div>)}</div>
       <div className="mt-auto flex flex-wrap items-center gap-3 pt-7"><QuoteButton service={service.title} /><WhatsAppButton compact label="WhatsApp" service={service.title} /></div>
     </div>
@@ -529,7 +557,7 @@ function ServiceCard({ service, image, index }: { service: (typeof services)[num
 
 function Services() {
   return <Shell title="Services | Mercury Décor Limited" path="/services">
-    <PageHero eyebrow="What we do" title="Built around your" italic="next conversation." text="Professional solutions for construction, finishing, supply and project support." />
+    <PageHero eyebrow="What we do" title="Finishing & construction services" italic="in Port Harcourt." text="Explore finishing, POP ceilings, building, materials supply and project support in Port Harcourt and beyond." />
     <section className="grid-blueprint bg-white py-20 md:py-28">
       <div className="container-wide">
         <div className="grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:items-end">
@@ -616,7 +644,7 @@ function Catalogs() {
   const visibleImages = galleryImages.map((image, index) => ({ image, index })).filter(({ index }) => matchesCatalogFilter(index, activeFilter));
 
   return <Shell title="Catalogs | Mercury Décor Limited" path="/catalogs">
-    <PageHero eyebrow="Digital showroom" title="Our" italic="Catalogs." text="A living reference library of finishing, building and decorative work for residential, commercial and corporate spaces." />
+    <PageHero eyebrow="Digital showroom" title="Finishing & building" italic="project catalogs." text="Browse real finishing, ceiling, building and decorative work alongside clearly identified future concepts." />
     <section className="bg-[#f5f7fa] py-16 md:py-24">
       <div className="container-wide">
         <div className="reveal grid gap-4 border-y border-[#082b54]/15 py-5 sm:grid-cols-3">
@@ -624,6 +652,7 @@ function Catalogs() {
           <div><span className="font-mono text-2xl font-bold text-[#a90000]">15</span><span className="ml-3 text-xs font-bold uppercase tracking-[.12em] text-[#5b6470]">moving studies</span></div>
           <div><span className="font-mono text-2xl font-bold text-[#a90000]">06</span><span className="ml-3 text-xs font-bold uppercase tracking-[.12em] text-[#5b6470]">service catalogs</span></div>
         </div>
+        <nav className="mt-8 flex flex-wrap gap-3" aria-label="Catalog categories">{seoContent.categories.map((category) => <AppLink key={category.slug} href={`/catalogs/${category.slug}`} className="rounded-full border border-[#082b54]/20 bg-white px-4 py-2 text-sm font-semibold text-[#082b54] hover:border-[#a90000]">{category.title} →</AppLink>)}</nav>
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {catalogs.map((catalog, index) => { const Icon = catalog.icon; return <article key={catalog.title} className={`reveal reveal-delay-${(index % 3) + 1} group flex flex-col overflow-hidden border border-[#082b54]/12 bg-white shadow-[0_16px_40px_rgba(8,43,84,.05)] lg:flex-row`}><div className="relative aspect-[1.15] overflow-hidden bg-[#dce4ec] lg:aspect-auto lg:w-[45%]"><img src={catalog.image} alt={`${catalog.title} visual atmosphere`} loading="lazy" className="h-full min-h-[250px] w-full object-contain" /><ImageWatermark /><div className="absolute inset-0 bg-gradient-to-t from-[#082b54]/80 via-transparent to-transparent" /><span className="absolute left-4 top-4 z-20 flex items-center gap-2 rounded-full bg-[#082b54]/90 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.14em] text-[#d6a62a]"><Icon size={13} />{catalog.category}</span></div><div className="flex flex-1 flex-col p-7"><h2 className="font-display text-2xl font-bold leading-tight text-[#082b54]">{catalog.title}</h2><p className="mt-3 text-sm leading-6 text-[#5b6470]">{catalog.description}</p><div className="mt-auto flex flex-wrap items-center gap-4 pt-8"><button type="button" onClick={() => setActive(catalog)} data-testid={`button-view-catalog-${index}`} className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[.06em] text-[#a90000]">View Catalog <ArrowRight size={14} /></button><QuoteButton service={catalog.title} /><WhatsAppButton compact label="WhatsApp" service={catalog.title} /></div></div></article>; })}
         </div>
@@ -634,6 +663,7 @@ function Catalogs() {
         <div className="reveal flex flex-col justify-between gap-6 border-b border-white/15 pb-8 md:flex-row md:items-end"><div><SectionLabel light>Project and concept imagery</SectionLabel><h2 className="mt-5 font-display text-4xl font-extrabold tracking-[-.05em] md:text-6xl">Spaces, finishes and <span className="font-editorial font-semibold italic text-[#d6a62a]">future possibilities.</span></h2></div><p className="max-w-[390px] text-sm leading-6 text-white/60">Browse by collection, then select any image to open a larger view and inspect the finish.</p></div>
         <div className="hide-scrollbar mt-8 flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Catalog collections">{catalogFilters.map((filter) => <button key={filter.id} type="button" role="tab" aria-selected={activeFilter === filter.id} onClick={() => setActiveFilter(filter.id)} className={`shrink-0 rounded-full border px-4 py-2.5 text-[10px] font-bold uppercase tracking-[.1em] transition-colors ${activeFilter === filter.id ? 'border-[#d6a62a] bg-[#d6a62a] text-[#082b54]' : 'border-white/20 text-white/70 hover:border-[#d6a62a] hover:text-[#d6a62a]'}`}>{filter.label}</button>)}</div>
         <p className="mt-4 text-xs text-white/45">{visibleImages.length} {visibleImages.length === 1 ? 'entry' : 'entries'} in this collection</p>
+        <nav aria-label="Featured project details" className="mb-6 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/80">{seoContent.projects.map((project) => <AppLink key={project.slug} href={`/catalogs/project/${project.slug}`} className="underline decoration-[#d6a62a] underline-offset-4 hover:text-[#d6a62a]">{project.title}</AppLink>)}</nav>
         <div className="mt-5 grid auto-rows-[180px] grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {visibleImages.map(({ image, index }) => <button id={`project-${index + 1}`} key={image.src} type="button" onClick={() => setSelectedImageIndex(index)} aria-label={`Open larger view: ${image.alt}`} className={`reveal reveal-delay-${(index % 3) + 1} group relative overflow-hidden bg-[#0b3769] text-left outline-none focus-visible:ring-2 focus-visible:ring-[#d6a62a] ${image.portrait ? 'row-span-2' : ''}`}><img src={image.src} alt={image.alt} loading="lazy" decoding="async" className="h-full w-full object-contain" /><ImageWatermark /><span className="pointer-events-none absolute inset-0 bg-[#061f3d]/0 transition-colors group-hover:bg-[#061f3d]/18" /><span className="pointer-events-none absolute inset-x-3 bottom-3 flex items-center justify-between gap-2 rounded-[2px] bg-[#082b54]/90 px-3 py-2 text-[9px] font-bold uppercase tracking-[.1em] text-white opacity-0 transition-all group-hover:opacity-100"><span>Project {String(index + 1).padStart(2, '0')}</span><span>{image.concept ? 'Concept' : index >= 66 ? 'Latest' : 'Portfolio'}</span></span></button>)}
         </div>
@@ -690,8 +720,49 @@ function Contact() {
   return <Shell title="Contact Mercury Décor Limited | Request a Quote" path="/contact"><PageHero eyebrow="Start the brief" title="Let’s talk about" italic="your project." text="Tell us what you need and our team will get back to you." /><section className="bg-[#f5f7fa] py-20 md:py-28"><div className="container-wide grid gap-14 lg:grid-cols-[.75fr_1.25fr] lg:gap-24"><div className="reveal lg:sticky lg:top-28"><SectionLabel>Contact Mercury Décor</SectionLabel><div className="mt-9 space-y-6"><div className="flex gap-4"><MapPin size={19} className="mt-1 shrink-0 text-[#a90000]" /><address className="not-italic text-sm leading-6 text-[#4b5563]">131 Circular Road,<br />Elekahia Housing Estate,<br />Port Harcourt,<br />Rivers State, Nigeria</address></div><a href="mailto:silnice873@gmail.com" data-testid="link-contact-email" className="flex gap-4 text-sm text-[#4b5563] hover:text-[#a90000]"><Mail size={19} className="text-[#a90000]" />silnice873@gmail.com</a><a href="tel:+2348082277274" data-testid="link-contact-phone" className="flex gap-4 text-sm text-[#4b5563] hover:text-[#a90000]"><Phone size={19} className="text-[#a90000]" />+234 808 227 7274</a></div><div className="mt-9 flex flex-wrap gap-3"><WhatsAppButton /><a href="https://www.google.com/maps/search/?api=1&query=131+Circular+Road+Elekahia+Housing+Estate+Port+Harcourt+Rivers+State+Nigeria" target="_blank" rel="noreferrer" data-testid="link-google-maps" className="inline-flex items-center gap-2 rounded-full border border-[#082b54]/20 px-5 py-3 text-sm font-bold text-[#082b54] hover:border-[#a90000] hover:text-[#a90000]"><MapPin size={16} />Google Maps</a></div></div><div className="reveal reveal-delay-1 rounded-[2px] border border-[#082b54]/12 bg-white p-6 shadow-[0_18px_60px_rgba(8,43,84,.06)] md:p-10"><QuoteForm /></div></div></section><section className="bg-[#082b54] py-16"><div className="container-wide min-h-[340px] overflow-hidden border border-white/15 bg-[#0b3769]"><iframe title="Mercury Décor Limited office location" src="https://www.google.com/maps?q=131%20Circular%20Road%2C%20Elekahia%20Housing%20Estate%2C%20Port%20Harcourt%2C%20Rivers%20State%2C%20Nigeria&output=embed" className="h-[340px] w-full border-0 opacity-80 grayscale-[.35]" loading="lazy" /></div></section></Shell>;
 }
 
+function ServiceDetail({ params }: { params: { slug: string } }) {
+  const service = seoContent.services.find((item) => item.slug === params.slug);
+  if (!service) return <NotFoundPage />;
+  const category = seoContent.categories.find((item) => item.slug === service.category);
+  const related = seoContent.projects.filter((item) => item.category === service.category).slice(0, 3);
+  return <Shell title={service.metaTitle} path={`/services/${service.slug}`}>
+    <PageHero eyebrow="Mercury Décor services" title={service.title} text={service.summary} />
+    <section className="bg-white py-16 md:py-24"><div className="container-wide grid gap-10 lg:grid-cols-[1fr_.8fr]">
+      <div><SectionLabel>What to consider</SectionLabel><h2 className="mt-5 font-display text-3xl font-bold text-[#082b54]">Plan a finish that suits the project.</h2><p className="mt-6 text-base leading-8 text-[#465366]">{service.intro}</p><p className="mt-5 text-base leading-8 text-[#465366]">{service.details}</p><div className="mt-8 flex flex-wrap gap-3"><QuoteButton service={service.title} /><WhatsAppButton compact service={service.title} /></div></div>
+      <figure className="bg-[#dce4ec]"><img src={galleryImages[service.imageIndex].src} alt={galleryImages[service.imageIndex].alt} loading="eager" className="aspect-[4/3] h-full w-full object-contain" width="720" height="540" /><figcaption className="px-4 py-3 text-sm text-[#344154]">{galleryImages[service.imageIndex].alt}</figcaption></figure>
+    </div></section>
+    <section className="bg-[#eef2f6] py-16"><div className="container-wide"><h2 className="font-display text-2xl font-bold text-[#082b54]">Explore relevant work</h2><p className="mt-3 max-w-2xl leading-7 text-[#465366]">Visual references help start a more specific conversation about materials, detail and site requirements.</p><div className="mt-7 flex flex-wrap gap-3"><AppLink href={`/catalogs/${category?.slug}`} className="rounded-full bg-[#082b54] px-5 py-3 text-sm font-bold text-white">Browse {category?.title}</AppLink>{related.map((item) => <AppLink key={item.slug} href={`/catalogs/project/${item.slug}`} className="rounded-full border border-[#082b54]/30 px-5 py-3 text-sm font-bold text-[#082b54]">{item.title}</AppLink>)}</div></div></section>
+  </Shell>;
+}
+
+function CatalogCategory({ params }: { params: { slug: string } }) {
+  const category = seoContent.categories.find((item) => item.slug === params.slug);
+  if (!category) return <NotFoundPage />;
+  const projects = seoContent.projects.filter((item) => item.category === category.slug);
+  return <Shell title={category.metaTitle} path={`/catalogs/${category.slug}`}>
+    <PageHero eyebrow="Project catalog" title={category.title} text={category.summary} />
+    <section className="bg-white py-16 md:py-24"><div className="container-wide"><h2 className="font-display text-3xl font-bold text-[#082b54]">Explore the details</h2><p className="mt-5 max-w-3xl text-base leading-8 text-[#465366]">{category.intro} {category.details}</p><div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{projects.map((item) => <article key={item.slug} className="overflow-hidden border border-[#082b54]/15 bg-[#f5f7fa]"><AppLink href={`/catalogs/project/${item.slug}`} className="block"><img src={galleryImages[item.imageIndex].src} alt={galleryImages[item.imageIndex].alt} loading="lazy" width="720" height="540" className="aspect-[4/3] w-full bg-[#dce4ec] object-contain" /><div className="p-5"><h3 className="font-display text-lg font-bold text-[#082b54]">{item.title}</h3><p className="mt-2 text-sm leading-6 text-[#465366]">{item.summary}</p><span className="mt-4 inline-block text-xs font-bold uppercase text-[#a90000]">View project details →</span></div></AppLink></article>)}</div><div className="mt-10 flex flex-wrap items-center gap-4"><AppLink href={`/services/${category.service}`} className="text-sm font-bold text-[#a90000]">Explore related services →</AppLink><AppLink href="/contact" className="text-sm font-bold text-[#082b54]">Discuss your project →</AppLink></div></div></section>
+  </Shell>;
+}
+
+function CatalogProject({ params }: { params: { slug: string } }) {
+  const project = seoContent.projects.find((item) => item.slug === params.slug);
+  if (!project) return <NotFoundPage />;
+  const category = seoContent.categories.find((item) => item.slug === project.category)!;
+  const image = galleryImages[project.imageIndex];
+  const featuredImage = `${import.meta.env.BASE_URL}featured-projects/${project.slug}.webp`;
+  return <Shell title={project.title} path={`/catalogs/project/${project.slug}`}>
+    <PageHero eyebrow={category.title} title={project.title} text={project.summary} />
+    <section className="bg-white py-16 md:py-24"><div className="container-wide grid gap-10 lg:grid-cols-[1.4fr_.6fr]"><figure className="bg-[#dce4ec]"><img src={featuredImage} alt={image.alt} width="960" height="720" className="max-h-[750px] w-full object-contain" /><figcaption className="p-4 text-sm text-[#344154]">{image.alt}</figcaption></figure><div><SectionLabel>Project reference</SectionLabel><h2 className="mt-5 font-display text-2xl font-bold text-[#082b54]">A closer look</h2><p className="mt-5 leading-8 text-[#465366]">{project.detail}</p><h3 className="mt-7 font-display text-xl font-bold text-[#082b54]">Planning a similar finish?</h3><p className="mt-4 leading-8 text-[#465366]">{project.consideration}</p><p className="mt-5 leading-8 text-[#465366]">Looking for a similar approach? Share your location, dimensions and desired finish so Mercury Décor Limited can discuss the requirements of your own project.</p><div className="mt-8 flex flex-wrap gap-3"><QuoteButton service={category.title} /><AppLink href={`/catalogs/${category.slug}`} className="rounded-full border border-[#082b54]/25 px-5 py-3 text-sm font-bold text-[#082b54]">More {category.title}</AppLink></div></div></div></section>
+  </Shell>;
+}
+
+function PortHarcourt() {
+  return <Shell title="Finishing Services in Port Harcourt" path="/port-harcourt"><PageHero eyebrow="Our location" title="Mercury Décor in" italic="Port Harcourt." text="Finishing, installation and materials support from Elekahia, Rivers State, with enquiries welcome for projects elsewhere in Nigeria." /><section className="bg-white py-16 md:py-24"><div className="container-wide grid gap-10 lg:grid-cols-2"><div><h2 className="font-display text-3xl font-bold text-[#082b54]">Plan a project in Rivers State</h2><p className="mt-5 leading-8 text-[#465366]">Mercury Décor Limited is based at 131 Circular Road, Elekahia Housing Estate, Port Harcourt, Rivers State, Nigeria. We work across residential, commercial and corporate project needs; availability and scope are discussed for each enquiry.</p><p className="mt-5 leading-8 text-[#465366]">For an accurate discussion, tell us the location, intended finish, dimensions where available and whether materials or installation support are needed. Clients elsewhere in Nigeria can also get in touch about their project requirements.</p><address className="mt-8 not-italic leading-8 text-[#082b54]">Mercury Décor Limited<br />131 Circular Road, Elekahia Housing Estate<br />Port Harcourt, Rivers State, Nigeria<br /><a href="tel:+2348082277274">+234 808 227 7274</a><br /><a href="mailto:silnice873@gmail.com">silnice873@gmail.com</a></address><div className="mt-8"><QuoteButton /></div></div><div><h2 className="font-display text-2xl font-bold text-[#082b54]">Explore services and examples</h2><nav aria-label="Local service links" className="mt-5 grid gap-3">{seoContent.services.map((service) => <AppLink key={service.slug} href={`/services/${service.slug}`} className="border-b border-[#082b54]/15 py-3 font-semibold text-[#082b54] hover:text-[#a90000]">{service.title} →</AppLink>)}<AppLink href="/catalogs" className="py-3 font-semibold text-[#a90000]">Explore the full project catalog →</AppLink></nav></div></div></section></Shell>;
+}
+
 function Router() {
-  return <RoutedErrorBoundary><Switch><Route path="/" component={Home} /><Route path="/about" component={About} /><Route path="/services" component={Services} /><Route path="/catalogs" component={Catalogs} /><Route path="/industries" component={Industries} /><Route path="/contact" component={Contact} /><Route component={NotFoundPage} /></Switch></RoutedErrorBoundary>;
+  return <RoutedErrorBoundary><Switch><Route path="/" component={Home} /><Route path="/about" component={About} /><Route path="/services/:slug" component={ServiceDetail} /><Route path="/services" component={Services} /><Route path="/catalogs/project/:slug" component={CatalogProject} /><Route path="/catalogs/:slug" component={CatalogCategory} /><Route path="/catalogs" component={Catalogs} /><Route path="/port-harcourt" component={PortHarcourt} /><Route path="/industries" component={Industries} /><Route path="/contact" component={Contact} /><Route component={NotFoundPage} /></Switch></RoutedErrorBoundary>;
 }
 function NotFoundPage() { useEffect(() => { document.title = 'Page Not Found | Mercury Décor Limited'; const robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]'); if (robots) robots.content = 'noindex, nofollow'; }, []); return <NotFound />; }
 function RoutedErrorBoundary({ children }: { children: ReactNode }) { const [location] = useLocation(); return <ErrorBoundary resetKey={location}>{children}</ErrorBoundary>; }

@@ -19,10 +19,6 @@ build = [ "pnpm", "--filter", "@workspace/mercury-decor", "run", "build" ]
 serve = "static"
 publicDir = "artifacts/mercury-decor/dist/public"
 
-[[services.production.rewrites]]
-from = "/*"
-to = "/index.html"
-
 [services.env]
 PORT = "25612"
 BASE_PATH = "/"

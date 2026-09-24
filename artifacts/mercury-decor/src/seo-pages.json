@@ -1,7 +1,7 @@
 {
   "/": {
-    "title": "Interior & Exterior Finishing in Port Harcourt | Mercury Décor",
-    "description": "Mercury Décor Limited provides interior and exterior finishing, construction, procurement, logistics and contracting services in Port Harcourt, Nigeria.",
+    "title": "Mercury Décor Limited | Finishing in Port Harcourt",
+    "description": "Mercury Décor Limited provides interior and exterior finishing, POP ceilings, construction, materials supply and project support in Port Harcourt, Nigeria.",
     "eyebrow": "Interior and exterior finishing specialists",
     "priority": "1.0",
     "changefreq": "weekly"
@@ -14,14 +14,14 @@
     "changefreq": "monthly"
   },
   "/services": {
-    "title": "Finishing & Construction Services in Port Harcourt",
+    "title": "Finishing & Construction Services | Mercury Décor Limited",
     "description": "Explore interior finishing, ceilings, installation, procurement, logistics and general contracting services from Mercury Décor Limited in Port Harcourt.",
     "eyebrow": "Finishing and construction services",
     "priority": "0.9",
     "changefreq": "monthly"
   },
   "/catalogs": {
-    "title": "Finishing & Building Project Gallery | Mercury Décor",
+    "title": "Finishing & Building Project Catalog | Mercury Décor",
     "description": "View Mercury Décor Limited's visual catalog of interior finishes, ceiling details, installations and completed building environments in Nigeria.",
     "eyebrow": "Project gallery and catalogs",
     "priority": "0.8",
