@@ -79,7 +79,7 @@ for (const [route, page] of pages) {
       },
       areaServed: [{ '@type': 'City', name: 'Port Harcourt' }, { '@type': 'AdministrativeArea', name: 'Rivers State' }, { '@type': 'Country', name: 'Nigeria' }]
     },
-    { '@type': 'WebSite', '@id': absolute('/#website'), name: 'Mercury Décor Limited', url: absolute('/'), publisher: { '@id': businessId }, inLanguage: 'en-NG' },
+    { '@type': 'WebSite', '@id': absolute('/#website'), name: 'Mercury Décor Limited', alternateName: 'Mercury Decor Limited', url: absolute('/'), publisher: { '@id': businessId }, inLanguage: 'en-NG' },
     {
       '@type': page.kind === 'category' ? 'CollectionPage' : 'WebPage', '@id': `${pageUrl}#webpage`,
       url: pageUrl, name: page.title, description: page.description, isPartOf: { '@id': absolute('/#website') },
