@@ -1,2 +1,3 @@
 - [Project video compatibility](project-video-compatibility.md) — Keep WebM before MP4 for every project video; some Chromium builds cannot decode otherwise valid H.264 uploads.
 - [Render pnpm compatibility](render-pnpm-compatibility.md) — Keep Corepack pinned to pnpm 10 while the workspace uses onlyBuiltDependencies; pnpm 12 ignores that policy.
+- [Render static host consolidation](render-static-host-consolidation.md) — Render static redirect rules match paths, not hostnames; disabling the default host returns 404 rather than redirecting.
